@@ -12,10 +12,10 @@ function Login (props) {
 	const [heartActive, setHeartActive] = useState(true);
 	
 	const navigate = useNavigate();
-    const [email, setEmail] = useState('demo@example.com');
+    const [email, setEmail] = useState('mubeenullhaq@gmail.com');
     let errorsObj = { email: '', password: '' };
     const [errors, setErrors] = useState(errorsObj);
-    const [password, setPassword] = useState('123456');
+    const [password, setPassword] = useState('12345');
     const dispatch = useDispatch();
 
     function onLogin(e) {
@@ -113,7 +113,7 @@ function Login (props) {
 											</div>
 										</div>
 										<div className="card-footer">
-											<div className=" bottom-footer clearfix m-t10 m-b20 row text-center">
+											{/* <div className=" bottom-footer clearfix m-t10 m-b20 row text-center">
 												<div className="col-lg-12 text-center">
 													<span> © Copyright by <span 
 														className={`heart ${heartActive ? "" : "heart-blast"}`}														
@@ -121,7 +121,7 @@ function Login (props) {
 													></span>
 													<a href="https://www.dexignzone.com/" target="_blank"> DexignZone </a> All rights reserved.</span> 
 												</div>
-											</div>
+											</div> */}
 										</div>													
 									</div>
 								</div>
