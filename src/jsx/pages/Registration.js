@@ -13,10 +13,14 @@ import bg6 from '../../images/background/bg6.jpg';
 function Register(props) {
 	const [heartActive, setHeartActive] = useState(true);
 
-    const [email, setEmail] = useState('');
-    let errorsObj = { email: '', password: '' };
+    const [name, setName] = useState('asdf');
+    //const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('mb@gmail.com');
+    const [password, setPassword] = useState('123');
+    const [repeat_password, setRepeatPassword] = useState('123');
+   
+	let errorsObj = { name: '', email: '', password: '' , password_mismatch: ''};
     const [errors, setErrors] = useState(errorsObj);
-    const [password, setPassword] = useState('');
 
     const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -25,6 +29,10 @@ function Register(props) {
         e.preventDefault();
         let error = false;
         const errorObj = { ...errorsObj };
+		if(name === ''){
+			errorObj.name = 'Name is Required';
+            error = true;
+        }
         if (email === '') {
             errorObj.email = 'Email is Required';
             error = true;
@@ -33,10 +41,15 @@ function Register(props) {
             errorObj.password = 'Password is Required';
             error = true;
         }
+		if(password != repeat_password){
+			errorObj.password_mismatch = 'Password Does not match';
+			error = true;
+		}
+		
         setErrors(errorObj);
         if (error) return;
         dispatch(loadingToggleAction(true));
-        dispatch(signupAction(email, password, navigate));
+        dispatch(signupAction(name, email, password, repeat_password, navigate));
     }
 	
 	return (
@@ -73,14 +86,15 @@ function Register(props) {
 																</div>
 																<p>Enter your personal details below: </p>
 																<div className="form-group mt-3">
-																	<input name="dzName" required="" className="form-control" placeholder="Full Name" type="text" />
+																	<input value = {name} onChange={(e) => setName(e.target.value)} required="" className="form-control" placeholder="Full Name" type="text" />
+																	{errors.name && <div className="text-danger fs-12">{errors.name}</div>}
 																</div>
-																<div className="form-group mt-3">
+																{/* <div className="form-group mt-3">
 																	<input name="dzName2" required="" className="form-control" placeholder="User Name" type="text" />
-																</div>
+																</div> */}
 																<div className="form-group mt-3">
 																	{/* <input name="dzName" required="" className="form-control" placeholder="Email Address" type="text" /> */}
-																	<input value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="hello@example.com"/>
+																	<input value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="Email"/>
 																	{errors.email && <div className="text-danger fs-12">{errors.email}</div>}
 																</div>
 																
@@ -96,10 +110,15 @@ function Register(props) {
 																		placeholder="passowrd"
 																	/>
 																	{errors.password && <div className="text-danger fs-12">{errors.password}</div>}
+																	{errors.password_mismatch && <div className="text-danger fs-12">{errors.password_mismatch}</div>}
 																</div>
-																{/* <div className="form-group mt-3 mb-3">
-																	<input name="dzName" required="" className="form-control" placeholder="Re-type Your Password" type="password" />
-																</div> */}
+																<div className="form-group mt-3 mb-3">
+																	<input  value={repeat_password}
+																		onChange={(e) =>
+																			setRepeatPassword(e.target.value)
+																		} name="dzName" required="" className="form-control" placeholder="Re-type Your Password" type="password" />
+																		{errors.password_mismatch && <div className="text-danger fs-12">{errors.password_mismatch}</div>}
+																</div> 
 																<div className="mb-3 mt-3">
 																	<span className="form-check float-start me-2">
 																		<input type="checkbox" className="form-check-input mt-0" id="check2" name="example1" />
