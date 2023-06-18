@@ -25,10 +25,13 @@ export function login(email, password) {
     const postData = {
         email,
         password,
-        returnSecureToken: true,
+        //returnSecureToken: true,
     };
+
+    const reqUrl = process.env.REACT_APP_MYARBIT_HostUrl+ "user/login"
+
     return axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
+        reqUrl,
         postData,
     );
 }
