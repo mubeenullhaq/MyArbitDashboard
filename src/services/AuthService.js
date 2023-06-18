@@ -37,14 +37,14 @@ export function login(email, password) {
 }
 
 export function formatError(errorResponse) {
-    switch (errorResponse.error.message) {
-        case 'EMAIL_EXISTS':
+    switch (errorResponse) {
+        case 'User alredy registered':
             //return 'Email already exists';
             swal("Oops", "Email already exists", "error");
             break;
-        case 'EMAIL_NOT_FOUND':
+        case 'Invalid email or password':
             //return 'Email not found';
-           swal("Oops", "Email not found", "error",{ button: "Try Again!",});
+           swal("Oops", "Invalid Email or Password ", "error",{ button: "Try Again!",});
            break;
         case 'INVALID_PASSWORD':
             //return 'Invalid Password';
