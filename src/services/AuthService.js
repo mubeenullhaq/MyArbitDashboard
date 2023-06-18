@@ -5,15 +5,18 @@ import {
     Logout,
 } from '../store/actions/AuthActions';
 
-export function signUp(email, password) {
+export function signUp(name, email, password, repeat_password) {
     //axios call
     const postData = {
+        name,
         email,
         password,
-        returnSecureToken: true,
+        repeat_password
+       // returnSecureToken: true,
     };
+    const reqUrl = process.env.REACT_APP_MYARBIT_HostUrl +"user";
     return axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
+        reqUrl,
         postData,
     );
 }
