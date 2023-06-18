@@ -59,12 +59,11 @@ export function formatError(errorResponse) {
 }
 
 export function saveTokenInLocalStorage(tokenDetails) {
-    tokenDetails.expireDate = new Date(
-        new Date().getTime() + tokenDetails.expiresIn * 1000,
-    );
+    // tokenDetails.expireDate = new Date(
+    //     new Date().getTime() + tokenDetails.expiresIn * 1000,
+    // );
     localStorage.setItem('userDetails', JSON.stringify(tokenDetails));
 }
-
 export function runLogoutTimer(dispatch, timer, navigate) {
     setTimeout(() => {
         //dispatch(Logout(history));
