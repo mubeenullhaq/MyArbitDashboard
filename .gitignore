@@ -13,6 +13,7 @@
 /build
 
 # misc
+/test.js
 .vscode
 .env
 .DS_Store

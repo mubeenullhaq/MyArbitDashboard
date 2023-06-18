@@ -290,6 +290,12 @@ const Markup = () => {
                   />
                 ))}
             </Route>
+            <Route path='page-lock-screen' element= {<LockScreen />} />
+            <Route path='page-error-400' element={<Error400/>} />
+            <Route path='page-error-403' element={<Error403/>} />
+            <Route path='page-error-404' element={<Error404/>} />
+            <Route path='page-error-500' element={<Error500/>} />
+            <Route path='page-error-503' element={<Error503/>} />
         </Routes>
         <ScrollToTop />
         
@@ -308,7 +314,7 @@ function MainLayout(){
             <Outlet />                
           </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 
