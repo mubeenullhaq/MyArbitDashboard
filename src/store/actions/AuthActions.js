@@ -20,17 +20,17 @@ export const LOGOUT_ACTION = '[Logout action] logout action';
 
 
 
-export function signupAction(email, password, navigate) {
+export function signupAction(name, email, password, repeat_password, navigate) {
 	
     return (dispatch) => {
-        signUp(email, password)
+        signUp(name, email, password, repeat_password)
         .then((response) => {
             saveTokenInLocalStorage(response.data);
-            runLogoutTimer(
-                dispatch,
-                response.data.expiresIn * 1000,
-                //history,
-            );
+            // runLogoutTimer(
+            //     dispatch,
+            //     response.data.expiresIn * 1000,
+            //     //history,
+            // );
             dispatch(confirmedSignupAction(response.data));
             navigate('/dashboard');
 			//history.push('/dashboard');
