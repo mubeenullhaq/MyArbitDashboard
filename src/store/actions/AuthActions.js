@@ -57,16 +57,16 @@ export function loginAction(email, password, navigate) {
          login(email, password)
             .then((response) => { 
                 saveTokenInLocalStorage(response.data);
-                runLogoutTimer(
-                    dispatch,
-                    response.data.expiresIn * 1000,
-                    navigate,
-                );
+                // runLogoutTimer(
+                //     dispatch,
+                //     response.data.expiresIn * 1000,
+                //     navigate,
+                // );
                dispatch(loginConfirmedAction(response.data));
-			   //console.log('kk------1');
-			   //console.log(kk);
-			   //console.log(response.data);
-			   //console.log('kk------2');
+			//    console.log('kk------1');
+			//    console.log(kk);
+			//    console.log(response.data);
+			//    console.log('kk------2');
 			   //return response.data;
 				//return 'success';
 				//history.push('/dashboard');                
