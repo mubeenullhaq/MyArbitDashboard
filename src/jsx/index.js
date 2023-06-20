@@ -114,6 +114,7 @@ import Lightgallery from "./components/PluginsMenu/Lightgallery/Lightgallery";
 import Widget from "./pages/Widget";
 import Pools from "./pages/Pools";
 import Stakings from "./pages/Stakings";
+import Calculator from "./pages/Calculator";
 
 /// Table
 import SortingTable from "./components/table/SortingTable/SortingTable";
@@ -244,6 +245,7 @@ const Markup = () => {
     { url: "widget-basic", component: <Widget /> },
     { url: "pools", component: <Pools /> },
     { url: "stakings", component: <Stakings /> },
+    { url: "calculator", component: <Calculator /> },
 
     ///// Form
     { url: "form-element", component: <Element /> },

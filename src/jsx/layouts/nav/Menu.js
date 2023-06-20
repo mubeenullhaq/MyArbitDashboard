@@ -12,7 +12,12 @@ export const MenuList = [
         iconStyle: <i className="bi bi-gear-wide"></i>,
         to: 'stakings',
     },
- 
+    {   
+        title:'Calculator',
+        //classsChange: 'mm-collapse',
+        iconStyle: <i className="bi bi-gear-wide"></i>,
+        to: 'calculator',
+    },
 
 
     // //Dashboard
