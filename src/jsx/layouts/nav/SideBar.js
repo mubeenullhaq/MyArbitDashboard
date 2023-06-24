@@ -234,7 +234,7 @@ const SideBar = () => {
             : ""
           : ""
       }`}
-    >
+      >
       <PerfectScrollbar className="deznav-scroll">         
           <ul className="metismenu" id="menu">
               {MenuList.map((data, index)=>{
@@ -255,12 +255,13 @@ const SideBar = () => {
                               onClick={() => {handleMenuActive(data.title)}}
                             >								
 								                {data.iconStyle}
+                                {/* menu title */}
                                 <span className="nav-text">{data.title}</span>
                             </Link>
                         :
                           <NavLink  to={data.to} >
                               {data.iconStyle}
-                              <span className="nav-text">{data.title}</span>
+                              <span className="nav-text">{data.title + ".."}</span>
                           </NavLink>
                         }
                         <Collapse in={state.active === data.title ? true :false}>
