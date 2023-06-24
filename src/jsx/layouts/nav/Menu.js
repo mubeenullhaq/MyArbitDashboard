@@ -7,10 +7,10 @@ export const MenuList = [
         to: 'pools',
     },
     {   
-        title:'Stakings',
+        title:'Manage Stakings',
         //classsChange: 'mm-collapse',
         iconStyle: <i className="bi bi-gear-wide"></i>,
-        to: 'stakings',
+        to: 'manage-stakings',
     },
     {   
         title:'Calculator',

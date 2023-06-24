@@ -244,7 +244,7 @@ const Markup = () => {
     ///// Widget
     { url: "widget-basic", component: <Widget /> },
     { url: "pools", component: <Pools /> },
-    { url: "stakings", component: <Stakings /> },
+    { url: "manage-stakings", component: <Stakings /> },
     { url: "calculator", component: <Calculator /> },
 
     ///// Form
