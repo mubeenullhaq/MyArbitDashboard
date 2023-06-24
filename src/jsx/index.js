@@ -113,7 +113,7 @@ import Lightgallery from "./components/PluginsMenu/Lightgallery/Lightgallery";
 // Widget
 import Widget from "./pages/Widget";
 import Pools from "./pages/Pools";
-import Stakings from "./pages/Stakings";
+import ManageStaking from "./pages/ManageStakings";
 import Calculator from "./pages/Calculator";
 
 /// Table
@@ -244,7 +244,7 @@ const Markup = () => {
     ///// Widget
     { url: "widget-basic", component: <Widget /> },
     { url: "pools", component: <Pools /> },
-    { url: "manage-stakings", component: <Stakings /> },
+    { url: "manage-stakings", component: <ManageStaking /> },
     { url: "calculator", component: <Calculator /> },
 
     ///// Form
