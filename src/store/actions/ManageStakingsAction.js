@@ -3,6 +3,7 @@ import {
     formatStakings,
     formatError,
     getStakings,
+    getStakingsHistory,
     deletePool,
     updatePool
 } from '../../services/ManageStakingsService';
@@ -15,10 +16,26 @@ import {
     CONFIRMED_DELETE_POOL_ACTION,
 } from './ManageStakingTypes';
 
-//Action for reading all the stakings of a Logged-In User
+//Action for reading all in-process stakings of a Logged-In User
 export function getStakingsAction() {
     return (dispatch, getState) => {
         getStakings().then((response) => {
+            let stakings = formatStakings(response.data);
+            dispatch(confirmedGetStakingsAction(stakings));
+        }).catch((error) => {
+            //console.log('error');
+            //console.log(error);
+            console.log(error);
+            const errorMessage = formatError(error.response.data);
+            dispatch(getStakingsFailedAction(errorMessage));
+        });;
+    };
+}
+
+//Action for reading all completed stakings of a Logged-In User
+export function getStakingsHistoryAction() {
+    return (dispatch, getState) => {
+        getStakingsHistory().then((response) => {
             let stakings = formatStakings(response.data);
             dispatch(confirmedGetStakingsAction(stakings));
         }).catch((error) => {
