@@ -62,19 +62,10 @@ export function loginAction(email, password, navigate) {
                 //     response.data.expiresIn * 1000,
                 //     navigate,
                 // );
-               dispatch(loginConfirmedAction(response.data));
-			//    console.log('kk------1');
-			//    console.log(kk);
-			//    console.log(response.data);
-			//    console.log('kk------2');
-			   //return response.data;
-				//return 'success';
-				//history.push('/dashboard');                
-				navigate('/dashboard');                
+               dispatch(loginConfirmedAction(response.data));               
+				navigate('/pools');                
             })
             .catch((error) => {
-				//console.log('error');
-				//console.log(error);
                 const errorMessage = formatError(error.response.data);
                 dispatch(loginFailedAction(errorMessage));
             });
