@@ -58,7 +58,7 @@ import Theme8 from "./components/Dashboard/Demo/Theme8";
 
 /// App
 import AppProfile from "./components/AppsMenu/AppProfile/AppProfile";
-import EditProfile from "./components/AppsMenu/AppProfile/EditProfile";
+import EditProfile from "./pages/EditProfile";
 import Compose from "./components/AppsMenu/Email/Compose/Compose";
 import Inbox from "./components/AppsMenu/Email/Inbox/Inbox";
 import Read from "./components/AppsMenu/Email/Read/Read";

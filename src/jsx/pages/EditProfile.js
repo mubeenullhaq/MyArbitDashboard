@@ -3,11 +3,10 @@ import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
 import Select from 'react-select';
 
-import user from './../../../../images/profile/pic1.jpg';
+import user from './../../images/profile/user.png';
 
 const inputBlog = [
-    { label:'Name', value:'John' },
-    { label:'Surname', value:'Brahim' },
+    { label:'Name', value:'' },
     { label:'Specialty', value:'Developer' },
     { label:'Skills', value:'HTML,  JavaScript,  PHP' },
 ];
@@ -57,9 +56,7 @@ const EditProfile = () => {
                                 </div>
                                 <div className="info-list">
                                     <ul>
-                                        <li><Link to={"/app-profile"}>Models</Link><span>36</span></li>
-                                        <li><Link to={"/uc-lightgallery"}>Gallery</Link><span>3</span></li>
-                                        <li><Link to={"/app-profile"}>Lessons</Link><span>1</span></li>
+                                        <li><Link to={"/app-profile"}>Tier</Link><span>3</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -77,18 +74,26 @@ const EditProfile = () => {
                 <div className="col-xl-9 col-lg-8">
                     <div className="card profile-card card-bx m-b30">
                         <div className="card-header">
-                            <h6 className="title">Account setup</h6>
+                            <h6 className="title">Edit Profile</h6>
                         </div>
                         <form className="profile-form">
                             <div className="card-body">
                                 <div className="row">
-                                    { inputBlog.map((item, ind)=>(
-                                        <div className="col-sm-6 m-b30" key={ind}>
-                                            <label className="form-label">{item.label}</label>
-                                            <input type="text" className="form-control" defaultValue={item.value}  />
-                                        </div>
-                                    ))}
+                                    <div className="col-sm-6 m-b30" >
+                                        <label className="form-label">Name</label>
+                                        <input type="text" className="form-control" defaultValue={''} placeholder='Enter Name' />
+                                    </div>   
                                    
+                                    <div className="col-sm-6 m-b30">
+                                        <label className="form-label">Email</label>
+                                        <input type="text" className="form-control" defaultValue="" placeholder='Your Email'/>
+                                    </div>
+
+                                    <div className="col-sm-6 m-b30">
+                                        <label className="form-label">Phone</label>
+                                        <input type="text" className="form-control" defaultValue="" placeholder='Your Phone Number' />
+                                    </div>
+
                                     <div className="col-sm-6 m-b30">                                        
                                         <label className="form-label">Gender</label>
                                         <Select options={options2}  className="custom-react-select" 
@@ -102,27 +107,19 @@ const EditProfile = () => {
                                         <input type="text" className="form-control" placeholder="dd. mm .yyyy" />
                                     </div>
                                     <div className="col-sm-6 m-b30">
-                                        <label className="form-label">Phone</label>
-                                        <input type="text" className="form-control" defaultValue="+123456789" />
-                                    </div>
-                                    <div className="col-sm-6 m-b30">
-                                        <label className="form-label">Email address</label>
-                                        <input type="text" className="form-control" defaultValue="demo@gmail.com" />
-                                    </div>
-                                    <div className="col-sm-6 m-b30">
                                         <label className="form-label">Country</label>
                                         <Select options={options3}  className="custom-react-select" 
                                             defaultValue={options3[0]}
-                                            isSearchable={false}
+                                            isSearchable={true}
                                         />
                                     </div>
-                                    <div className="col-sm-6 m-b30">
+                                    {/* <div className="col-sm-6 m-b30">
                                         <label className="form-label">City</label> 
                                         <Select options={options4}  className="custom-react-select" 
                                             defaultValue={options4[0]}
                                             isSearchable={false}
                                         />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="card-footer">
