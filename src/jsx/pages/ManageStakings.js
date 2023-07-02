@@ -23,7 +23,7 @@ return (
     <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
       <div className="card">
         <div className="card-header">
-          <h4 className="card-title">Recent Payments Queue</h4>
+          <h4 className="card-title">Stakings In Process</h4>
         </div>
         <div className="card-body">
           <div className="table-responsive recentOrderTable">
