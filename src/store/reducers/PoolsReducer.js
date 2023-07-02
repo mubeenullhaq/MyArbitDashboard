@@ -91,5 +91,5 @@ export default function PoolsReducer(state = initialState, action) {
     //     };
     // }
 
-    return state;
+    //return state;
 }
