@@ -60,7 +60,7 @@ const ManageStakings = (props) => {
                   <thead>
                     <tr>
                       <th scope="col">Pool Name</th>
-                      <th scope="col">Duration</th>
+                      <th scope="col">Duration(days)</th>
                       <th scope="col">Profit</th>
                       <th scope="col">Action</th>
                     </tr>
