@@ -37,6 +37,7 @@ const StakeHistory = (props) => {
                       <th scope="col">Pool Name</th>
                       <th scope="col">Duration(days)</th>
                       <th scope="col">Profit</th>
+                      <th scope="col">Amount Staked</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -47,6 +48,7 @@ const StakeHistory = (props) => {
                           <td>{staking.pool_info.name}</td>
                           <td>{staking.pool_info.duration}</td>
                           <td>{staking.pool_info.profit}</td>
+                          <td>{staking.amount}</td>
                           <td>
                             <a
                               class="btn btn-primary btn-xxs shadow"
