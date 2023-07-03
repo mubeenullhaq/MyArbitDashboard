@@ -115,6 +115,7 @@ import Widget from "./pages/Widget";
 import Pools from "./pages/Pools";
 import ManageStaking from "./pages/ManageStakings";
 import StakeHistory from "./pages/StakeHistory";
+import Transactions from "./pages/Transactions";
 import Calculator from "./pages/Calculator";
 
 /// Table
@@ -249,6 +250,7 @@ const Markup = () => {
     { url: "manage-stakings", component: <ManageStaking /> },
     { url: "calculator", component: <Calculator /> },
     { url: "stake-history", component: <StakeHistory /> },
+    { url: "transactions", component: <Transactions /> },
 
     ///// Form
     { url: "form-element", component: <Element /> },
