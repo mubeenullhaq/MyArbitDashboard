@@ -58,7 +58,7 @@ const Pools = (props) => {
                   <thead>
                     <tr>
                       <th scope="col">Name</th>
-                      <th scope="col">Duration</th>
+                      <th scope="col">Duration(days)</th>
                       <th scope="col">Min-Stake</th>
                       <th scope="col">Profit</th>
                       <th scope="col">Action</th>
