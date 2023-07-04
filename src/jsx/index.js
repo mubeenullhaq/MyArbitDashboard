@@ -139,6 +139,7 @@ import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
 import Error503 from "./pages/Error503";
 import { ThemeContext } from "../context/ThemeContext";
+import profile from "../images/profile/bitcoin.png";
 
 const Markup = () => {
   const allroutes = [
@@ -314,16 +315,17 @@ function MainLayout() {
     >
       <div class="area">
         <ul class="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+          <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
+          
         </ul>
         <Nav />
         <div
