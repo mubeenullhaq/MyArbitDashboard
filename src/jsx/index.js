@@ -127,7 +127,7 @@ import Wizard from "./components/Forms/Wizard/Wizard";
 import CkEditor from "./components/Forms/CkEditor/CkEditor";
 import Pickers from "./components/Forms/Pickers/Pickers";
 import FormValidation from "./components/Forms/FormValidation/FormValidation";
-
+import Card from "./components/card";
 /// Pages
 //import Registration from "./pages/Registration";
 //import Login from "./pages/Login";
@@ -315,17 +315,76 @@ function MainLayout() {
     >
       <div class="area">
         <ul class="circles">
-        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-        <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-          <li><img src={profile} className="img-fluid rounded-circle" alt="profile"/></li>
-          
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
         </ul>
         <Nav />
         <div
@@ -333,11 +392,12 @@ function MainLayout() {
           style={{ minHeight: window.screen.height - 45 }}
         >
           <div className="container-fluid">
+            <Card />
             <Outlet />
           </div>
         </div>
+        {/* <Footer /> */}
       </div>
-      {/* <Footer /> */}
     </div>
   );
 }
