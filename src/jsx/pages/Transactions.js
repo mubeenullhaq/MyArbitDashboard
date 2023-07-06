@@ -44,7 +44,8 @@ const Transactions = (props) => {
                     {props.transactions.transactions &&
                       props.transactions.transactions.map((transaction) => (
                         <tr key={transaction.id}>
-                          <td>{transaction.type}</td>
+                          <td><span class={(transaction.type === "deposit") ? "badge bg-success badge-lg" : "badge-danger badge badge-lg"}>{transaction.type}</span>
+                            </td>
                           <td>{transaction.amount}</td>
                           <td>{transaction.created_at}</td>
                         </tr>
