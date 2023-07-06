@@ -2,6 +2,22 @@ import axiosInstance from "./AxiosInstance";
 import swal from "sweetalert";
 
 //Read All in_process stakings of a logged in User
+export function createStaking(_amount, _poolId) {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "stakings";
+  //console.log(localStorage.jwt);
+  let token = JSON.parse(localStorage.jwt);
+  const data = {
+    amount_staked: _amount,
+    pool_id: _poolId,
+  };
+  const headers = {
+    "Content-Type": "application/json",
+    "x-auth-token": token,
+  };
+  return axiosInstance.post(url, data, { headers });
+}
+
+//Read All in_process stakings of a logged in User
 export function getStakings() {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "stakings";
   //console.log(localStorage.jwt);
