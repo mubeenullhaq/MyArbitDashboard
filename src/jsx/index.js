@@ -139,7 +139,11 @@ import Error404 from "./pages/Error404";
 import Error500 from "./pages/Error500";
 import Error503 from "./pages/Error503";
 import { ThemeContext } from "../context/ThemeContext";
-import profile from "../images/profile/bitcoin.png";
+import bitcoin from "../images/background/bitcoin.png";
+import asd from "../images/background/asd.png";
+import dogecoin from "../images/background/dogecoin.png";
+import litecoin from "../images/background/litecoin.png";
+import eth from "../images/background/eth.png";
 
 const Markup = () => {
   const allroutes = [
@@ -317,73 +321,57 @@ function MainLayout() {
         <ul class="circles">
           <li>
             <img
-              src={profile}
+              src={bitcoin}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img src={asd} className="img-fluid rounded-circle" alt="profile" />
+          </li>
+          <li>
+            <img
+              src={dogecoin}
               className="img-fluid rounded-circle"
               alt="profile"
             />
           </li>
           <li>
             <img
-              src={profile}
+              src={litecoin}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img src={eth} className="img-fluid rounded-circle" alt="profile" />
+          </li>
+          <li>
+            <img
+              src={bitcoin}
+              className="img-fluid rounded-circle"
+              alt="profile"
+            />
+          </li>
+          <li>
+            <img src={asd} className="img-fluid rounded-circle" alt="profile" />
+          </li>
+          <li>
+            <img
+              src={dogecoin}
               className="img-fluid rounded-circle"
               alt="profile"
             />
           </li>
           <li>
             <img
-              src={profile}
+              src={litecoin}
               className="img-fluid rounded-circle"
               alt="profile"
             />
           </li>
           <li>
-            <img
-              src={profile}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
-          </li>
-          <li>
-            <img
-              src={profile}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
-          </li>
-          <li>
-            <img
-              src={profile}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
-          </li>
-          <li>
-            <img
-              src={profile}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
-          </li>
-          <li>
-            <img
-              src={profile}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
-          </li>
-          <li>
-            <img
-              src={profile}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
-          </li>
-          <li>
-            <img
-              src={profile}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={eth} className="img-fluid rounded-circle" alt="profile" />
           </li>
         </ul>
         <Nav />
