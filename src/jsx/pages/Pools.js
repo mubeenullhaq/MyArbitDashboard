@@ -66,6 +66,7 @@ const Pools = (props) => {
     const form = e.target;
     const poolId = form.elements.poolId.value;
     const minStake = form.elements.minStake.value;
+    let user = JSON.parse(localStorage.getItem("userDetails"));
 
     console.log(poolId);
     let error = false;
@@ -78,8 +79,22 @@ const Pools = (props) => {
         return;
       }
     }
-    let user = JSON.parse(localStorage.getItem("userDetails")) 
-
+    if (stakeAmount === "0") {
+      errorObj.amount = "Staking Amount must be greater than 0...";
+      error = true;
+      setErrors(errorObj);
+      if (error) {
+        return;
+      }
+    }
+    if (!isNumber(stakeAmount)) {
+      errorObj.amount = " Staking Amount Must be a Number";
+      error = true;
+      setErrors(errorObj);
+      if (error) {
+        return;
+      }
+    }
     if (JSON.parse(stakeAmount) > user.balance) {
       errorObj.amount = "Insufficient Balance.";
       error = true;
@@ -96,19 +111,6 @@ const Pools = (props) => {
       if (error) {
         return;
       }
-    }
-
-    if (stakeAmount === "0") {
-      errorObj.amount = "Staking Amount must be greater than 0...";
-      error = true;
-    }
-    if (!isNumber(stakeAmount)) {
-      errorObj.amount = " Staking Amount Must be a Number";
-      error = true;
-    }
-    setErrors(errorObj);
-    if (error) {
-      return;
     }
     //console.log(e);
     //reduxDispatch(createStakingsAction());
@@ -155,7 +157,7 @@ const Pools = (props) => {
                         <td>{pool.name}</td>
                         <td>{pool.duration}</td>
                         <td>{pool.min_stake}</td>
-                        <td>{pool.profit+"%"}</td>
+                        <td>{pool.profit + "%"}</td>
                         <td>
                           <Button
                             as="a"
@@ -181,9 +183,7 @@ const Pools = (props) => {
                                   className="close"
                                   x
                                   data-dismiss="modal"
-                                  onClick={() =>
-                                    closeModal(index)
-                                  }
+                                  onClick={() => closeModal(index)}
                                 >
                                   <span>×</span>
                                 </Button>
