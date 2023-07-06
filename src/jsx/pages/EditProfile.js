@@ -109,8 +109,9 @@ const EditProfile = () => {
                                     <div className="col-sm-6 m-b30">
                                         <label className="form-label">Country</label>
                                         <Select options={options3}  className="custom-react-select" 
-                                            defaultValue={options3[0]}
+                                            defaultValue={''}
                                             isSearchable={true}
+                                            placeholder={"Select Country"}
                                         />
                                     </div>
                                     {/* <div className="col-sm-6 m-b30">
