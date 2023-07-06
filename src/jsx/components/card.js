@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 
 const BalanceCard = () => {
+  const { user } = JSON.parse(localStorage.userDetails);
   return (
     <Fragment>
       <div class="container text-center">
@@ -14,7 +15,7 @@ const BalanceCard = () => {
                   </span>
                   <div className="media-body text-white">
                     <p className="mb-1">Balance</p>
-                    <h3 className="text-white">250$</h3>
+                    <h3 className="text-white">{user.balance}$</h3>
                     <div className="progress mb-2 bg-secondary">
                       <div
                         className="progress-bar progress-animated bg-white"
@@ -36,7 +37,7 @@ const BalanceCard = () => {
                   </span>
                   <div className="media-body text-white">
                     <p className="mb-1">Amount Staked</p>
-                    <h3 className="text-white">250$</h3>
+                    <h3 className="text-white">{user.total_staked}$</h3>
                     <div className="progress mb-2 bg-secondary">
                       <div
                         className="progress-bar progress-animated bg-white"
