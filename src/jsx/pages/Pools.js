@@ -182,7 +182,7 @@ const Pools = (props) => {
                                   x
                                   data-dismiss="modal"
                                   onClick={() =>
-                                    dispatch({ type: "createStakingClose" })
+                                    closeModal(index)
                                   }
                                 >
                                   <span>×</span>
