@@ -155,7 +155,7 @@ const Pools = (props) => {
                         <td>{pool.name}</td>
                         <td>{pool.duration}</td>
                         <td>{pool.min_stake}</td>
-                        <td>{pool.profit}</td>
+                        <td>{pool.profit+"%"}</td>
                         <td>
                           <Button
                             as="a"

@@ -47,7 +47,7 @@ const StakeHistory = (props) => {
                         <tr key={staking.id}>
                           <td>{staking.pool_info.name}</td>
                           <td>{staking.pool_info.duration}</td>
-                          <td>{staking.pool_info.profit}</td>
+                          <td>{staking.pool_info.profit+ "%"}</td>
                           <td>{staking.amount}</td>
                           <td>
                             <a
