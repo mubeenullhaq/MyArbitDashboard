@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
 const BalanceCard = () => {
-  const { user } = JSON.parse(localStorage.userDetails);
+  const user = JSON.parse(localStorage.userDetails);
   return (
     <Fragment>
       <div class="container text-center">
