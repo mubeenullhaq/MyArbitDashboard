@@ -1,28 +1,9 @@
-import React, {
-  useState,
-  useEffect,
-  useReducer,
-  Fragment,
-  Suspense,
-} from "react";
+import React, { useState, useEffect, Fragment, Suspense } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { getPoolsAction } from "../../store/actions/PoolsActions";
 import { createStakingsAction } from "../../store/actions/ManageStakingsAction";
 import { Dropdown, Button, Modal } from "react-bootstrap";
-
-const initialState = false;
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "createStaking":
-      return { ...state, createStaking: true };
-    case "createStakingClose":
-      return { ...state, createStaking: false };
-
-    default:
-      return state;
-  }
-};
 
 function isNumber(str) {
   if (str.trim() === "") {
@@ -34,8 +15,12 @@ function isNumber(str) {
 
 const Pools = (props) => {
   const reduxDispatch = useDispatch();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [autoStakIsChecked, setAutoStakIsChecked] = useState(false);
   const [modalVisibility, setModalVisibility] = useState([]);
+
+  const toggleSwitch = () => {
+    setAutoStakIsChecked(!autoStakIsChecked);
+  };
 
   const openModal = (index) => {
     const updatedVisibility = [...modalVisibility];
@@ -66,6 +51,7 @@ const Pools = (props) => {
     const form = e.target;
     const poolId = form.elements.poolId.value;
     const minStake = form.elements.minStake.value;
+    const autoStake = form.elements.autoStake.value;
     let user = JSON.parse(localStorage.getItem("userDetails"));
 
     console.log(poolId);
@@ -114,7 +100,9 @@ const Pools = (props) => {
     }
     //console.log(e);
     //reduxDispatch(createStakingsAction());
-    reduxDispatch(createStakingsAction(stakeAmount, poolId, navigate));
+    reduxDispatch(
+      createStakingsAction(stakeAmount, poolId, autoStake, navigate)
+    );
     closeModal(index);
     /* {
       Model should be closed here.
@@ -251,6 +239,24 @@ const Pools = (props) => {
                                           className="submit btn btn-primary"
                                           name="submit"
                                         />
+                                      </div>
+                                      <div class="form-check form-switch">
+                                        <input
+                                          class="form-check-input"
+                                          type="checkbox"
+                                          role="switch"
+                                          id="flexSwitchCheckChecked"
+                                          name="autoStake"
+                                          value={autoStakIsChecked}
+                                          checked={autoStakIsChecked}
+                                          onChange={toggleSwitch}
+                                        />
+                                        <label
+                                          class="form-check-label"
+                                          for="flexSwitchCheckChecked"
+                                        >
+                                          Turn Auto Restake On
+                                        </label>
                                       </div>
                                     </div>
                                   </div>

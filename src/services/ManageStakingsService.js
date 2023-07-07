@@ -2,13 +2,14 @@ import axiosInstance from "./AxiosInstance";
 import swal from "sweetalert";
 
 //Read All in_process stakings of a logged in User
-export function createStaking(_amount, _poolId) {
+export function createStaking(_amount, _poolId, _autoStake) {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "stakings";
   //console.log(localStorage.jwt);
   let token = JSON.parse(localStorage.jwt);
   const data = {
     amount_staked: _amount,
     pool_id: _poolId,
+    auto_stake: _autoStake,
   };
   const headers = {
     "Content-Type": "application/json",

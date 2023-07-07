@@ -16,9 +16,9 @@ import {
 } from "./ManageStakingTypes";
 
 //Action to create a staking of a Logged-In User
-export function createStakingsAction(_amount, _poolId, navigate) {
+export function createStakingsAction(_amount, _poolId, _autoStake, navigate) {
   return (dispatch, getState) => {
-    createStaking(_amount, _poolId)
+    createStaking(_amount, _poolId, _autoStake)
       .then((response) => {
         let staking = response.data.staking;
         let updated_user = response.data.updated_user;
