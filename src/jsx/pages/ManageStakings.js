@@ -75,16 +75,14 @@ const ManageStakings = (props) => {
                           <td>{staking.pool_info.duration}</td>
                           <td>{staking.pool_info.profit + "%"}</td>
                           <td>{staking.amount_staked}</td>
-                          <td>
-                            <span
-                              class={
-                                staking.auto_stake === true
-                                  ? "badge-success badge"
-                                  : "badge-danger badge"
-                              }
-                            >
-                              {staking.auto_stake == true ? "ON" : "OFF"}
-                            </span>
+                          <td
+                            class={
+                              staking.auto_stake === true
+                                ? "text-success"
+                                : "text-danger"
+                            }
+                          >
+                            {staking.auto_stake == true ? "ON" : "OFF"}
                           </td>
                           <td>
                             {" "}
