@@ -73,7 +73,9 @@ export function checkAutoLogin(dispatch, navigate) {
     return;
   }
 
-  tokenDetails = JSON.parse(tokenDetailsString);
+  tokenDetails = {
+    idToken: tokenDetailsString,
+  };
   let expireDate = new Date(tokenDetails.expireDate);
   let todaysDate = new Date();
 
@@ -84,6 +86,6 @@ export function checkAutoLogin(dispatch, navigate) {
 
   dispatch(loginConfirmedAction(tokenDetails));
 
-  const timer = expireDate.getTime() - todaysDate.getTime();
-  runLogoutTimer(dispatch, timer, navigate);
+  // const timer = expireDate.getTime() - todaysDate.getTime();
+  // runLogoutTimer(dispatch, timer, navigate);
 }
