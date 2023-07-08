@@ -11569,8 +11569,8 @@ label {
   text-align: left;
   position: absolute;
   top: 0;
-  background-color: var(--nav-headbg);
-  transition: all 0.2s ease;
+  background-color: #362465d9/*var(--nav-headbg) */;
+  transition: all 0.5s ease;
   z-index: 5;
   /*  .logo-abbr {
         max-width: 2.9375rem;
@@ -11859,7 +11859,7 @@ label {
   padding-left: 18.563rem;
   padding-right: 100px;
   padding-top: 0rem;
-  transition: all 0.2s ease;
+  transition: all 0.5s ease;
 }
 @media only screen and (max-width: 100rem) {
   .header {
@@ -15982,8 +15982,8 @@ html[dir="rtl"]
   top: 5rem;
   padding-top: 1rem;
   z-index: 6;
-  background-color: var(--sidebar-bg);
-  transition: all 0.2s ease;
+  background-color: #362465d9; /*var(--sidebar-bg); */
+  transition: all 0.5s ease;
   box-shadow: 0rem 0.9375rem 1.875rem 0rem rgba(0, 0, 0, 0.02);
 }
 @media only screen and (max-width: 87.5rem) {
@@ -50030,7 +50030,7 @@ html[dir="rtl"]
 
 :root {
   --primary: #9568ff;
-  --secondary: #362465;
+  --secondary: #362465d9;
   --secondary-dark: #22173f;
   --primary-hover: #7135ff;
   --primary-dark: #3d00ce;
