@@ -11569,7 +11569,7 @@ label {
   text-align: left;
   position: absolute;
   top: 0;
-  background-color: #362465d9/*var(--nav-headbg) */;
+  background-color: var(--nav-headbg) ;
   transition: all 0.5s ease;
   z-index: 5;
   /*  .logo-abbr {
@@ -15982,7 +15982,7 @@ html[dir="rtl"]
   top: 5rem;
   padding-top: 1rem;
   z-index: 6;
-  background-color: #362465d9; /*var(--sidebar-bg); */
+  background-color: var(--sidebar-bg);
   transition: all 0.5s ease;
   box-shadow: 0rem 0.9375rem 1.875rem 0rem rgba(0, 0, 0, 0.02);
 }
@@ -50030,7 +50030,7 @@ html[dir="rtl"]
 
 :root {
   --primary: #9568ff;
-  --secondary: #362465d9;
+  --secondary: #362465;
   --secondary-dark: #22173f;
   --primary-hover: #7135ff;
   --primary-dark: #3d00ce;
