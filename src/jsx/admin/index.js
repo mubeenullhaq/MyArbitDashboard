@@ -147,7 +147,7 @@ function MainLayout() {
           style={{ minHeight: window.screen.height - 45 }}
         >
           <div className="container-fluid">
-            <Card />
+            {/* <Card /> */}
             <Outlet />
           </div>
         </div>
