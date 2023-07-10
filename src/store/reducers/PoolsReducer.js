@@ -1,4 +1,4 @@
-import { CONFIRMED_GET_POOL_ACTION, CONFIRMED_GET_POOL_REQUEST_ACTION, CONFIRMED_CREATE_POOL_ACTION } from "../actions/PoolsTypes";
+import { CONFIRMED_GET_POOL_ACTION, CONFIRMED_GET_POOL_REQUEST_ACTION, CONFIRMED_CREATE_POOL_ACTION, CONFIRMED_HIDE_POOL_ACTION } from "../actions/PoolsTypes";
 
 const initialState = {
   pools: [],
@@ -25,6 +25,13 @@ export default function PoolsReducer(state = initialState, action) {
         pools: action.payload,
         isLoading: false,
       };
+    case CONFIRMED_HIDE_POOL_ACTION:
+      return {
+        ...state,
+        //pools: action.payload,
+        isLoading: false,
+      };
+
     default:
       return state;
   }
