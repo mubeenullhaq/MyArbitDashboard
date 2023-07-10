@@ -1,63 +1,63 @@
 export const MenuList = [
   {
-    title: "Pools",
+    title: "Manage Pools",
     //classsChange: 'mm-collapse',
     iconStyle: <i className="material-icons">trending_up</i>,
     to: "pools",
   },
-  {
-    title: " Profile",
-    //classsChange: 'mm-collapse',
+  // {
+  //   title: " Profile",
+  //   //classsChange: 'mm-collapse',
 
-    iconStyle: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="60"
-        height="60"
-        fill="currentColor"
-        class="bi bi-person-vcard-fill"
-        viewBox="0 0 16 16"
-      >
-        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z" />
-      </svg>
-    ), //<i class="bi bi-person-vcard-fill"></i>,//<i className="bi bi-clock-history"></i>,
-    to: "profile",
-  },
-  {
-    title: "Manage Stakings",
-    //classsChange: 'mm-collapse',
-    iconStyle: <i className="bi bi-stack"></i>,
-    to: "manage-stakings",
-  },
-  {
-    title: "Profit Calculator",
-    //classsChange: 'mm-collapse',
-    iconStyle: <i className="bi bi-calculator-fill"></i>,
-    to: "calculator",
-  },
-  {
-    title: "Stake History",
-    //classsChange: 'mm-collapse',
-    iconStyle: <i className="bi bi-clock-history"></i>,
-    to: "stake-history",
-  },
-  {
-    title: " Transactions",
-    //classsChange: 'mm-collapse',
-    iconStyle: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-bank"
-        viewBox="0 0 16 16"
-      >
-        <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
-      </svg>
-    ), //<i className="bi bi-bank"></i>,
-    to: "transactions",
-  },
+  //   iconStyle: (
+  //     <svg
+  //       xmlns="http://www.w3.org/2000/svg"
+  //       width="60"
+  //       height="60"
+  //       fill="currentColor"
+  //       class="bi bi-person-vcard-fill"
+  //       viewBox="0 0 16 16"
+  //     >
+  //       <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z" />
+  //     </svg>
+  //   ), //<i class="bi bi-person-vcard-fill"></i>,//<i className="bi bi-clock-history"></i>,
+  //   to: "profile",
+  // },
+  // {
+  //   title: "Manage Stakings",
+  //   //classsChange: 'mm-collapse',
+  //   iconStyle: <i className="bi bi-stack"></i>,
+  //   to: "manage-stakings",
+  // },
+  // {
+  //   title: "Profit Calculator",
+  //   //classsChange: 'mm-collapse',
+  //   iconStyle: <i className="bi bi-calculator-fill"></i>,
+  //   to: "calculator",
+  // },
+  // {
+  //   title: "Stake History",
+  //   //classsChange: 'mm-collapse',
+  //   iconStyle: <i className="bi bi-clock-history"></i>,
+  //   to: "stake-history",
+  // },
+  // {
+  //   title: " Transactions",
+  //   //classsChange: 'mm-collapse',
+  //   iconStyle: (
+  //     <svg
+  //       xmlns="http://www.w3.org/2000/svg"
+  //       width="16"
+  //       height="16"
+  //       fill="currentColor"
+  //       class="bi bi-bank"
+  //       viewBox="0 0 16 16"
+  //     >
+  //       <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.501.501 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89L8 0ZM3.777 3h8.447L8 1 3.777 3ZM2 6v7h1V6H2Zm2 0v7h2.5V6H4Zm3.5 0v7h1V6h-1Zm2 0v7H12V6H9.5ZM13 6v7h1V6h-1Zm2-1V4H1v1h14Zm-.39 9H1.39l-.25 1h13.72l-.25-1Z" />
+  //     </svg>
+  //   ), //<i className="bi bi-bank"></i>,
+  //   to: "transactions",
+  // },
 
   // //Dashboard
   // {
