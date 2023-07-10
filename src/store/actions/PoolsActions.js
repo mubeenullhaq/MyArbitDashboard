@@ -1,5 +1,5 @@
-import { createPool, formatPools, getPools, deletePool, updatePool } from "../../services/PoolsService";
-import { CONFIRMED_CREATE_POOL_ACTION, CONFIRMED_GET_POOL_ACTION, CONFIRMED_EDIT_POOL_ACTION, CONFIRMED_DELETE_POOL_ACTION } from "./PoolsTypes";
+import { createPool, formatPools, getPools, hidePool, deletePool, updatePool } from "../../services/PoolsService";
+import { CONFIRMED_CREATE_POOL_ACTION, CONFIRMED_GET_POOL_ACTION, CONFIRMED_HIDE_POOL_ACTION } from "./PoolsTypes";
 
 export function createPoolAction(_poolName, _duration, _profit) {
   return (dispatch, getState) => {
@@ -21,6 +21,14 @@ export function getPoolsAction() {
     });
   };
 }
+
+export function hidePoolAction(_id) {
+  return (dispatch, getState) => {
+    hidePool(_id).then((response) => {
+      dispatch(confirmedHidePoolAction(response.data));
+    });
+  };
+}
 export function confirmedGetPoolsAction(pools) {
   return {
     type: CONFIRMED_GET_POOL_ACTION,
@@ -31,6 +39,13 @@ export function confirmedGetPoolsAction(pools) {
 export function confirmedCreatePoolsAction(pool) {
   return {
     type: CONFIRMED_CREATE_POOL_ACTION,
+    payload: pool,
+  };
+}
+
+export function confirmedHidePoolAction(pool) {
+  return {
+    type: CONFIRMED_HIDE_POOL_ACTION,
     payload: pool,
   };
 }
