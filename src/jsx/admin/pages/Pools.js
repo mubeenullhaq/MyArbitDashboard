@@ -212,11 +212,11 @@ const Pools = (props) => {
                               <div className="modal-body">
                                 <form className="comment-form" onSubmit={(e) => handleHidePool(e, index)}>
                                   {/* <div className="row"> */}
-                                  <div className="col-lg-8">
+                                  <div className="col">
                                     <div className="form-group mb-3">
                                       <h3 htmlFor="author" className="text-black font-w600">
                                         {" "}
-                                        Are you sure you want to Hide the pool "{pool.name}" on Partner Dashboard{""}
+                                        Are you sure you want to change hidden status of the pool "{pool.name}" on Partner Dashboard{""}
                                       </h3>
                                       <input type="text" value={pool._id} style={{ visibility: "hidden" }} name="poolId" placeholder="POOL_ID" />
                                     </div>
