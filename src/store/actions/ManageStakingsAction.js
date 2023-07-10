@@ -1,19 +1,6 @@
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
-import {
-  createPool,
-  formatStakings,
-  formatError,
-  getStakings,
-  getStakingsHistory,
-  createStaking,
-  updatePool,
-} from "../../services/ManageStakingsService";
-import {
-  CONFIRMED_CREATE_STAKINGS_ACTION,
-  CONFIRMED_GET_STAKINGS_ACTION,
-  GET_STAKINGS_FAILED_ACTION,
-  LOADING_TOGGLE_ACTION,
-} from "./ManageStakingTypes";
+import { createPool, formatStakings, formatError, getStakings, getStakingsHistory, createStaking, updatePool } from "../../services/ManageStakingsService";
+import { CONFIRMED_CREATE_STAKINGS_ACTION, CONFIRMED_GET_STAKINGS_ACTION, GET_STAKINGS_FAILED_ACTION, LOADING_TOGGLE_ACTION } from "./ManageStakingTypes";
 
 //Action to create a staking of a Logged-In User
 export function createStakingsAction(_amount, _poolId, _autoStake, navigate) {
