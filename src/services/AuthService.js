@@ -67,6 +67,7 @@ export function runLogoutTimer(dispatch, timer, navigate) {
 
 export function checkAutoLogin(dispatch, navigate) {
   const tokenDetailsString = localStorage.getItem("jwt");
+  const user = JSON.parse(localStorage.getItem("userDetails"));
   let tokenDetails = "";
   if (!tokenDetailsString) {
     dispatch(Logout(navigate));
@@ -75,6 +76,7 @@ export function checkAutoLogin(dispatch, navigate) {
 
   tokenDetails = {
     idToken: tokenDetailsString,
+    user: user,
   };
   let expireDate = new Date(tokenDetails.expireDate);
   let todaysDate = new Date();
