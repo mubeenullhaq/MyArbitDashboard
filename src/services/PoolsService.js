@@ -20,6 +20,19 @@ export function createPool(_poolName, _duration, _profit) {
   return axiosInstance.post(url, data, { headers });
 }
 
+export function hidePool(_id) {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "pools";
+  let token = JSON.parse(localStorage.jwt);
+  const data = {
+    poolId: _id,
+  };
+  const headers = {
+    "Content-Type": "application/json",
+    "x-auth-token": token,
+  };
+  return axiosInstance.put(url, data, { headers });
+}
+
 export function updatePool(post, postId) {
   return axiosInstance.put(`posts/${postId}.json`, post);
 }
