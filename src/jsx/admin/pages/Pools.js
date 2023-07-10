@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment, Suspense } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { getPoolsAction, createPoolAction } from "../../../store/actions/PoolsActions";
+import { getPoolsAction, createPoolAction, hidePoolAction } from "../../../store/actions/PoolsActions";
 import { createStakingsAction } from "../../../store/actions/ManageStakingsAction";
 import { Dropdown, Button, Modal } from "react-bootstrap";
 
@@ -18,10 +18,6 @@ const Pools = (props) => {
   const [autoStakIsChecked, setAutoStakIsChecked] = useState(false);
   const [modalVisibility, setModalVisibility] = useState([]);
   const [newPoolModalVisibility, setNewPoolModalVisibility] = useState(false);
-
-  const toggleSwitch = () => {
-    setAutoStakIsChecked(!autoStakIsChecked);
-  };
 
   const openNewPoolModal = () => {
     setNewPoolModalVisibility(true);
@@ -43,11 +39,8 @@ const Pools = (props) => {
     setModalVisibility(updatedVisibility);
   };
 
-  const navigate = useNavigate();
-
-  //To get staking amount for staking creation
-  const [stakeAmount, setStakeAmount] = useState("");
-  const [poolId, setPoolId] = useState();
+  //To handle admin inputs for pool creation
+  const [input, setInput] = useState("");
   let errorsObj = { amount: "" };
   const [errors, setErrors] = useState(errorsObj);
 
@@ -55,68 +48,7 @@ const Pools = (props) => {
     reduxDispatch(getPoolsAction());
   }, []);
 
-  function handleCreateStaking(e, index) {
-    e.preventDefault();
-    const form = e.target;
-    const poolId = form.elements.poolId.value;
-    const minStake = form.elements.minStake.value;
-    const autoStake = form.elements.autoStake.value;
-    let user = JSON.parse(localStorage.getItem("userDetails"));
-
-    console.log(poolId);
-    let error = false;
-    const errorObj = { ...errorsObj };
-    if (stakeAmount === "") {
-      errorObj.amount = "Staking Amount must be valid number...";
-      error = true;
-      setErrors(errorObj);
-      if (error) {
-        return;
-      }
-    }
-    if (stakeAmount === "0") {
-      errorObj.amount = "Staking Amount must be greater than 0...";
-      error = true;
-      setErrors(errorObj);
-      if (error) {
-        return;
-      }
-    }
-    if (!isNumber(stakeAmount)) {
-      errorObj.amount = " Staking Amount Must be a Number";
-      error = true;
-      setErrors(errorObj);
-      if (error) {
-        return;
-      }
-    }
-    if (JSON.parse(stakeAmount) > user.balance) {
-      errorObj.amount = "Insufficient Balance.";
-      error = true;
-      setErrors(errorObj);
-      if (error) {
-        return;
-      }
-    }
-
-    if (JSON.parse(stakeAmount) < minStake) {
-      errorObj.amount = `Please enter an amount greater than ${minStake}`;
-      error = true;
-      setErrors(errorObj);
-      if (error) {
-        return;
-      }
-    }
-    //console.log(e);
-    //reduxDispatch(createStakingsAction());
-    reduxDispatch(createStakingsAction(stakeAmount, poolId, autoStake, navigate));
-    closeModal(index);
-    /* {
-      Model should be closed here.
-    } */
-  }
-
-  function handleCreatePool(e, index) {
+  function handleCreatePool(e) {
     e.preventDefault();
     const form = e.target;
     let poolErrorsObj = { poolName: "", duration: "", profit: "" };
@@ -158,7 +90,19 @@ const Pools = (props) => {
     closeNewPoolModal();
     return "Working";
   }
+  function handleHidePool(e, index) {
+    e.preventDefault();
+    const form = e.target;
 
+    const poolId = form.elements.poolId.value;
+
+    reduxDispatch(hidePoolAction(poolId));
+    setTimeout(() => {
+      reduxDispatch(getPoolsAction());
+    }, 2000);
+    closeModal(index);
+    return "Working";
+  }
   return (
     <Fragment>
       <Suspense
@@ -199,7 +143,7 @@ const Pools = (props) => {
                               Name <span className="required">*</span>
                               {""}
                             </label>
-                            <input type="text" className="form-control" onChange={(e) => setStakeAmount(e.target.value)} name="poolName" placeholder="Enter Pool Name" />
+                            <input type="text" className="form-control" onChange={(e) => setInput(e.target.value)} name="poolName" placeholder="Enter Pool Name" />
                             {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>}
                           </div>
                           <div className="form-group mb-3">
@@ -208,7 +152,7 @@ const Pools = (props) => {
                               Duration <span className="required">*</span>
                               {""}
                             </label>
-                            <input type="text" className="form-control" onChange={(e) => setStakeAmount(e.target.value)} name="duration" placeholder="Enter Duration(Days)" />
+                            <input type="text" className="form-control" onChange={(e) => setInput(e.target.value)} name="duration" placeholder="Enter Duration(Days)" />
                             {errors.duration && <div className="text-danger fs-12">{errors.duration}</div>}
                           </div>
                           <div className="form-group mb-3">
@@ -217,7 +161,7 @@ const Pools = (props) => {
                               Profit <span className="required">*</span>
                               {""}
                             </label>
-                            <input type="text" className="form-control" onChange={(e) => setStakeAmount(e.target.value)} name="profit" placeholder="Enter Prfoit(%)" />
+                            <input type="text" className="form-control" onChange={(e) => setInput(e.target.value)} name="profit" placeholder="Enter Prfoit(%)" />
                             {errors.profit && <div className="text-danger fs-12">{errors.profit}</div>}
                           </div>
                         </div>
@@ -241,6 +185,7 @@ const Pools = (props) => {
                       <th scope="col">Duration(days)</th>
                       <th scope="col">Min-Stake</th>
                       <th scope="col">Profit</th>
+                      <th scope="col">Status</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -251,8 +196,9 @@ const Pools = (props) => {
                         <td>{pool.duration}</td>
                         <td>{pool.min_stake}</td>
                         <td>{pool.profit + "%"}</td>
+                        <td class={pool.is_hidden === false ? "text-success" : "text-danger"}>{pool.is_hidden === true ? "Hidden" : "Not Hidden"}</td>
                         <td>
-                          <a href="#" class="btn btn-primary shadow btn-xs sharp me-3" onClick={() => console.log("aa")}>
+                          <a href="#" class="btn btn-primary shadow btn-xs sharp me-3" onClick={() => openModal(index)}>
                             <i class="fas fa-trash"></i>
                           </a>
                           <Modal className="modal fade" show={modalVisibility[index]} onHide={() => closeModal(index)}>
@@ -264,26 +210,32 @@ const Pools = (props) => {
                                 </Button>
                               </div>
                               <div className="modal-body">
-                                <form className="comment-form" onSubmit={(e) => handleCreateStaking(e, index)}>
-                                  <div className="row">
-                                    <div className="col-lg-8">
-                                      <div className="form-group mb-3">
-                                        <label htmlFor="author" className="text-black font-w600">
-                                          {" "}
-                                          Amount <span className="required">*</span>
-                                          {""}
-                                        </label>
-                                        <input type="text" className="form-control" onChange={(e) => setStakeAmount(e.target.value)} name="stakeAmount" placeholder="Enter Staking Amount" />
-                                        {errors.amount && <div className="text-danger fs-12">{errors.amount}</div>}
-                                        <input type="text" value={pool._id} style={{ visibility: "hidden" }} onChange={(e) => setStakeAmount(e.target.value)} name="poolId" placeholder="Author" />
-                                      </div>
+                                <form className="comment-form" onSubmit={(e) => handleHidePool(e, index)}>
+                                  {/* <div className="row"> */}
+                                  <div className="col-lg-8">
+                                    <div className="form-group mb-3">
+                                      <h3 htmlFor="author" className="text-black font-w600">
+                                        {" "}
+                                        Are you sure you want to Hide the pool "{pool.name}" on Partner Dashboard{""}
+                                      </h3>
+                                      <input type="text" value={pool._id} style={{ visibility: "hidden" }} name="poolId" placeholder="POOL_ID" />
                                     </div>
-                                    <div className="col-lg-12">
-                                      <div className="form-group mb-3">
-                                        <input type="submit" value="Confirm Staking" className="submit btn btn-primary" name="submit" />
+                                  </div>
+                                  <div className="col-lg-12 text-center">
+                                    <div class="row justify-content-center">
+                                      <div class="col">
+                                        <div className="form-group mb-3">
+                                          <input type="submit" value=" Yes" className="submit btn btn-danger" name="submit" />
+                                        </div>
+                                      </div>
+                                      <div className="col">
+                                        <div className="form-group mb-3">
+                                          <input type="button" value="No" className="submit btn btn-success" onClick={() => closeModal(index)} />
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
+                                  {/* </div> */}
                                 </form>
                               </div>
                             </div>
