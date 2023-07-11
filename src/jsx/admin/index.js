@@ -17,7 +17,7 @@ import ScrollToTop from "./layouts/ScrollToTop";
 import Card from "./components/card";
 
 import Pools from "./pages/Pools";
-import EditProfile from "./pages/EditProfile";
+import ManagePartners from "./pages/ManagePartners";
 import ManageStaking from "./pages/ManageStakings";
 import StakeHistory from "./pages/StakeHistory";
 import Transactions from "./pages/Transactions";
@@ -39,7 +39,7 @@ import eth from "../../images/background/eth.png";
 const Markup = () => {
   const allroutes = [
     { url: "pools", component: <Pools /> },
-    { url: "profile", component: <EditProfile /> },
+    { url: "manage-partners", component: <ManagePartners /> },
     { url: "manage-stakings", component: <ManageStaking /> },
     { url: "calculator", component: <Calculator /> },
     { url: "stake-history", component: <StakeHistory /> },
@@ -57,12 +57,7 @@ const Markup = () => {
         <Route path="page-error-503" element={<Error503 />} />
         <Route element={<MainLayout />}>
           {allroutes.map((data, i) => (
-            <Route
-              key={i}
-              exact
-              path={`${data.url}`}
-              element={data.component}
-            />
+            <Route key={i} exact path={`${data.url}`} element={data.component} />
           ))}
         </Route>
         <Route path="page-lock-screen" element={<LockScreen />} />
@@ -80,72 +75,42 @@ const Markup = () => {
 function MainLayout() {
   const { menuToggle } = useContext(ThemeContext);
   return (
-    <div
-      id="main-wrapper"
-      className={`show ${menuToggle ? "menu-toggle" : ""}`}
-    >
+    <div id="main-wrapper" className={`show ${menuToggle ? "menu-toggle" : ""}`}>
       <div class="area">
         <ul class="circles">
           <li>
-            <img
-              src={bitcoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={bitcoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
             <img src={asd} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={dogecoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={dogecoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={litecoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={litecoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
             <img src={eth} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={bitcoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={bitcoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
             <img src={asd} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={dogecoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={dogecoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={litecoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={litecoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
             <img src={eth} className="img-fluid rounded-circle" alt="profile" />
           </li>
         </ul>
         <Nav />
-        <div
-          className="content-body"
-          style={{ minHeight: window.screen.height - 45 }}
-        >
+        <div className="content-body" style={{ minHeight: window.screen.height - 45 }}>
           <div className="container-fluid">
             {/* <Card /> */}
             <Outlet />
