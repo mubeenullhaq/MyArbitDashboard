@@ -2,6 +2,21 @@ import axiosInstance from "./AxiosInstance";
 import swal from "sweetalert";
 
 //Read All transactions of a logged in User
+export function getWithdrawlRequestTransactions() {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "transactions//withdraw-requests";
+  //console.log(localStorage.jwt);
+  let token = JSON.parse(localStorage.jwt);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    },
+  };
+  return axiosInstance.get(url, config);
+}
+
+//Read All transactions of a logged in User
 export function getTransactions() {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "transactions";
   //console.log(localStorage.jwt);
