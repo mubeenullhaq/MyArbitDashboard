@@ -1,16 +1,12 @@
-import {
-  CONFIRMED_GET_TRANSACTIONS_ACTION,
-  GET_TRANSACTIONS_FAILED_ACTION,
-  LOADING_TOGGLE_ACTION,
-} from "../actions/TransactionsTypes";
+import { CONFIRMED_GET_TRANSACTIONS_ACTION, CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION, GET_TRANSACTIONS_FAILED_ACTION, LOADING_TOGGLE_ACTION } from "../actions/TransactionsTypes";
 
 const initialState = {
-  transactions: null,
-  error: null,
+  transactions: [],
   showLoading: false,
+  error: null,
 };
 
-export default function ManageStakingsReducer(state = initialState, action) {
+export default function TransactionsReducer(state = initialState, action) {
   switch (action.type) {
     case LOADING_TOGGLE_ACTION:
       return {
@@ -18,6 +14,13 @@ export default function ManageStakingsReducer(state = initialState, action) {
         showLoading: action.payload,
       };
     case CONFIRMED_GET_TRANSACTIONS_ACTION:
+      return {
+        ...state,
+        transactions: action.payload,
+        showLoading: false,
+      };
+
+    case CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION:
       return {
         ...state,
         transactions: action.payload,
