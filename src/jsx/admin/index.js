@@ -18,6 +18,7 @@ import Card from "./components/card";
 
 import Pools from "./pages/Pools";
 import ManagePartners from "./pages/ManagePartners";
+import ManageFunds from "./pages/ManageFunds";
 import ManageStaking from "./pages/ManageStakings";
 import StakeHistory from "./pages/StakeHistory";
 import Transactions from "./pages/Transactions";
@@ -39,8 +40,8 @@ import eth from "../../images/background/eth.png";
 const Markup = () => {
   const allroutes = [
     { url: "pools", component: <Pools /> },
-    { url: "manage-partners", component: <ManagePartners /> },
-    { url: "manage-stakings", component: <ManageStaking /> },
+    { url: "manage_partners", component: <ManagePartners /> },
+    { url: "manage-funds", component: <ManageFunds /> },
     { url: "calculator", component: <Calculator /> },
     { url: "stake-history", component: <StakeHistory /> },
     { url: "transactions", component: <Transactions /> },
