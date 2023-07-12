@@ -1,9 +1,6 @@
 import React, { useState, useEffect, Fragment, Suspense } from "react";
 import { connect, useDispatch } from "react-redux";
-import {
-  getTransactionsAction,
-  loadingToggleAction,
-} from "../../../store/actions/TransactionsActions";
+import { getTransactionsAction, loadingToggleAction } from "../../../store/actions/TransactionsActions";
 
 const Transactions = (props) => {
   const dispatch = useDispatch();
@@ -45,15 +42,7 @@ const Transactions = (props) => {
                       props.transactions.transactions.map((transaction) => (
                         <tr key={transaction.id}>
                           <td>
-                            <span
-                              class={
-                                transaction.type === "deposit"
-                                  ? "badge bg-success badge-lg"
-                                  : "badge-danger badge badge-lg"
-                              }
-                            >
-                              {transaction.type}
-                            </span>
+                            <span class={transaction.type === "deposit" ? "badge bg-success badge-lg" : "badge-danger badge badge-lg"}>{transaction.type}</span>
                           </td>
                           <td>{transaction.amount}</td>
                           <td>{transaction.created_at}</td>
