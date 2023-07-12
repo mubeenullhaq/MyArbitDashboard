@@ -10,7 +10,7 @@ export const MenuList = [
     //classsChange: 'mm-collapse',
 
     iconStyle: <i class="bi bi-person-vcard-fill"></i>,
-    to: "manage_partners",
+    to: "manage-partners",
   },
   {
     title: "Manage Funds",

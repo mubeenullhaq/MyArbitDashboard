@@ -40,7 +40,7 @@ import eth from "../../images/background/eth.png";
 const Markup = () => {
   const allroutes = [
     { url: "pools", component: <Pools /> },
-    { url: "manage_partners", component: <ManagePartners /> },
+    { url: "manage-partners", component: <ManagePartners /> },
     { url: "manage-funds", component: <ManageFunds /> },
     { url: "calculator", component: <Calculator /> },
     { url: "stake-history", component: <StakeHistory /> },
