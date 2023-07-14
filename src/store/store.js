@@ -5,6 +5,7 @@ import { AuthReducer } from "./reducers/AuthReducer";
 import PoolsReducer from "./reducers/PoolsReducer";
 import ManageStakingsReducer from "./reducers/ManageStakingsReducer";
 import TransactionsReducer from "./reducers/TransactionsReducer";
+import PartnersReducer from "./reducers/PartnersReducer";
 
 import todoReducers from "./reducers/Reducers";
 //import { reducer as reduxFormReducer } from 'redux-form';
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   pools: PoolsReducer,
   stakings: ManageStakingsReducer,
   transactions: TransactionsReducer,
+  partners: PartnersReducer,
   auth: AuthReducer,
   todoReducers,
   //form: reduxFormReducer,
