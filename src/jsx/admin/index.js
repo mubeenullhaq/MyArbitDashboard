@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 /// React router dom
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 
 /// Css
 import "./index.css";
@@ -67,6 +67,7 @@ const Markup = () => {
         <Route path="page-error-404" element={<Error404 />} />
         <Route path="page-error-500" element={<Error500 />} />
         <Route path="page-error-503" element={<Error503 />} />
+        <Route path="*" element={<Navigate to="/pools" replace />} />
       </Routes>
       <ScrollToTop />
     </>

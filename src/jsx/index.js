@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 
 /// React router dom
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 
 /// Css
 import "./index.css";
@@ -290,12 +290,7 @@ const Markup = () => {
         <Route path="page-error-503" element={<Error503 />} />
         <Route element={<MainLayout />}>
           {allroutes.map((data, i) => (
-            <Route
-              key={i}
-              exact
-              path={`${data.url}`}
-              element={data.component}
-            />
+            <Route key={i} exact path={`${data.url}`} element={data.component} />
           ))}
         </Route>
         <Route path="page-lock-screen" element={<LockScreen />} />
@@ -304,6 +299,7 @@ const Markup = () => {
         <Route path="page-error-404" element={<Error404 />} />
         <Route path="page-error-500" element={<Error500 />} />
         <Route path="page-error-503" element={<Error503 />} />
+        <Route path="*" element={<Navigate to="/pools" replace />} />
       </Routes>
       <ScrollToTop />
     </>
@@ -313,72 +309,42 @@ const Markup = () => {
 function MainLayout() {
   const { menuToggle } = useContext(ThemeContext);
   return (
-    <div
-      id="main-wrapper"
-      className={`show ${menuToggle ? "menu-toggle" : ""}`}
-    >
+    <div id="main-wrapper" className={`show ${menuToggle ? "menu-toggle" : ""}`}>
       <div class="area">
         <ul class="circles">
           <li>
-            <img
-              src={bitcoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={bitcoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
             <img src={asd} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={dogecoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={dogecoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={litecoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={litecoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
             <img src={eth} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={bitcoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={bitcoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
             <img src={asd} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={dogecoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={dogecoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
-            <img
-              src={litecoin}
-              className="img-fluid rounded-circle"
-              alt="profile"
-            />
+            <img src={litecoin} className="img-fluid rounded-circle" alt="profile" />
           </li>
           <li>
             <img src={eth} className="img-fluid rounded-circle" alt="profile" />
           </li>
         </ul>
         <Nav />
-        <div
-          className="content-body"
-          style={{ minHeight: window.screen.height - 45 }}
-        >
+        <div className="content-body" style={{ minHeight: window.screen.height - 45 }}>
           <div className="container-fluid">
             <Card />
             <Outlet />
