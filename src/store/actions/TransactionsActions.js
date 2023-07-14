@@ -1,5 +1,11 @@
-import { formatStakings, formatError, getTransactions, getWithdrawlRequestTransactions } from "../../services/TransactionsService";
-import { CONFIRMED_GET_TRANSACTIONS_ACTION, CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION, GET_TRANSACTIONS_FAILED_ACTION, LOADING_TOGGLE_ACTION } from "./TransactionsTypes";
+import { formatStakings, formatError, getTransactions, getWithdrawlRequestTransactions, updateWithdrawRequest } from "../../services/TransactionsService";
+import {
+  CONFIRMED_GET_TRANSACTIONS_ACTION,
+  CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION,
+  GET_TRANSACTIONS_FAILED_ACTION,
+  LOADING_TOGGLE_ACTION,
+  CONFIRMED_UPDATE_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION,
+} from "./TransactionsTypes";
 
 //Action for reading all transactions of a Logged-In User
 export function getTransactionsAction() {
@@ -19,7 +25,31 @@ export function getTransactionsAction() {
   };
 }
 
-//Action for reading withdrawl Request transactions
+//Action to update withdraw request of a partner by admin only
+export function updateWithdrawRequestAction(_transactionId, _partnerId) {
+  return (dispatch, getState) => {
+    updateWithdrawRequest(_transactionId, _partnerId)
+      .then((response) => {
+        dispatch(confirmedUpdateTransactionsAction(response.data));
+      })
+      .catch((error) => {
+        //console.log('error');
+        //console.log(error);
+        console.log(error);
+        const errorMessage = formatError(error.response.data);
+        dispatch(getTransactionsFailedAction(errorMessage));
+      });
+  };
+}
+
+export function confirmedUpdateTransactionsAction(_transaction) {
+  return {
+    type: CONFIRMED_UPDATE_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION,
+    payload: _transaction,
+  };
+}
+
+//Action for reading all withdrawl Request transactions for Admin
 export function getWithdrawlRequestTransactionsAction() {
   return (dispatch, getState) => {
     getWithdrawlRequestTransactions()
@@ -31,8 +61,7 @@ export function getWithdrawlRequestTransactionsAction() {
         //console.log('error');
         //console.log(error);
         console.log(error);
-        const errorMessage = formatError(error.response.data);
-        dispatch(getTransactionsFailedAction(errorMessage));
+        dispatch(getTransactionsFailedAction(error.response.data));
       });
   };
 }
