@@ -1,4 +1,10 @@
-import { CONFIRMED_GET_TRANSACTIONS_ACTION, CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION, GET_TRANSACTIONS_FAILED_ACTION, LOADING_TOGGLE_ACTION } from "../actions/TransactionsTypes";
+import {
+  CONFIRMED_GET_TRANSACTIONS_ACTION,
+  CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION,
+  GET_TRANSACTIONS_FAILED_ACTION,
+  LOADING_TOGGLE_ACTION,
+  CONFIRMED_UPDATE_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION,
+} from "../actions/TransactionsTypes";
 
 const initialState = {
   transactions: [],
@@ -24,6 +30,11 @@ export default function TransactionsReducer(state = initialState, action) {
       return {
         ...state,
         transactions: action.payload,
+        showLoading: false,
+      };
+    case CONFIRMED_UPDATE_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION:
+      return {
+        ...state,
         showLoading: false,
       };
     case GET_TRANSACTIONS_FAILED_ACTION:
