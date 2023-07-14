@@ -15,22 +15,21 @@ function isNumber(str) {
 
 const Pools = (props) => {
   const reduxDispatch = useDispatch();
-  const [autoStakIsChecked, setAutoStakIsChecked] = useState(false);
   const [modalVisibility, setModalVisibility] = useState([]);
-  const [newPoolModalVisibility, setNewPoolModalVisibility] = useState(false);
+  const [createPoolModalVisibility, createNewPoolModalVisibility] = useState(false);
 
-  const openNewPoolModal = () => {
-    setNewPoolModalVisibility(true);
+  const openCreatePoolModal = () => {
+    createNewPoolModalVisibility(true);
+  };
+
+  const closeCreatePoolModal = () => {
+    createNewPoolModalVisibility(false);
   };
 
   const openModal = (index) => {
     const updatedVisibility = [...modalVisibility];
     updatedVisibility[index] = true;
     setModalVisibility(updatedVisibility);
-  };
-
-  const closeNewPoolModal = () => {
-    setNewPoolModalVisibility(false);
   };
 
   const closeModal = (index) => {
@@ -87,7 +86,7 @@ const Pools = (props) => {
     setTimeout(() => {
       reduxDispatch(getPoolsAction());
     }, 2000);
-    closeNewPoolModal();
+    closeCreatePoolModal();
     return "Working";
   }
   function handleHidePool(e, index) {
@@ -121,14 +120,14 @@ const Pools = (props) => {
             <div className="card-header">
               <h4 className="card-title">Investment Pools List</h4>
 
-              <button href="#" class="btn btn-primary shadow " onClick={() => openNewPoolModal()}>
+              <button href="#" class="btn btn-primary shadow " onClick={() => openCreatePoolModal()}>
                 Add New Pool
               </button>
-              <Modal className="modal fade" show={newPoolModalVisibility} onHide={() => closeNewPoolModal()}>
+              <Modal className="modal fade" show={createPoolModalVisibility} onHide={() => closeCreatePoolModal()}>
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title">Create New Pool</h5>
-                    <Button variant="" type="button" className="close" x data-dismiss="modal" onClick={() => closeNewPoolModal()}>
+                    <Button variant="" type="button" className="close" x data-dismiss="modal" onClick={() => closeCreatePoolModal()}>
                       <span>×</span>
                     </Button>
                   </div>
