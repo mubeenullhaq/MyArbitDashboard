@@ -6,6 +6,8 @@ export const CONFIRMED_GET_TRANSACTIONS_ACTION = "[transactions Action] Confirme
 
 export const CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION = "[transactions Action] Confirmed Get Withdrawl Request Transactions";
 
+export const CONFIRMED_UPDATE_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION = "[transactions Action] Confirmed Update Withdrawl Request Transactions";
+
 export const GET_TRANSACTIONS_FAILED_ACTION = "[transactions Action] Confirmed Get Request POOLSs";
 
 //export const EDIT_POOLS_ACTION = '[transactions Action] Edit pools';
