@@ -1,15 +1,15 @@
-import React, { useState, useMemo } from "react";
-//import { Dropdown } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import React, { useState, useMemo, useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
 import Select from "react-select";
 
-import user from "./../../../images/profile/user.png";
+import { Dropdown, Button, Modal } from "react-bootstrap";
 import DateRangePicker from "react-bootstrap-daterangepicker";
 
 import { useTable, useSortBy } from "react-table";
+import { getPartnersAction, updatePartnerAction, blockPartnerAction } from "../../../store/actions/PartnersActions";
+
 import PageTitle from "../../layouts/PageTitle";
 import MOCK_DATA from "../components/SortingTable/MOCK_DATA_2.json";
-import { COLUMNS } from "../components/SortingTable/Columns";
 
 const options3 = [
   { value: "1", label: "Russia" },
@@ -18,12 +18,123 @@ const options3 = [
   { value: "4", label: "India" },
 ];
 
-const EditProfile = () => {
+const ManagePartners = (props) => {
+  const [editModal, setEditModal] = useState(false);
+  const [partner, setPartner] = useState({});
+  const [partnerId, setPartnerId] = useState("");
+
+  const dispatch = useDispatch();
+
+  function handleUpdatePartner(e) {
+    e.preventDefault();
+    dispatch(updatePartnerAction(partner));
+    setTimeout(() => {
+      dispatch(getPartnersAction());
+    }, 2000);
+    closeEditModal();
+  }
+  function handleAction(partner) {
+    const status = partner.isBlocked; //console.log(partner.isBlocked);
+    const partnerId = partner._id; //console.log(partner._id);
+    dispatch(blockPartnerAction(partnerId, status));
+    setTimeout(() => {
+      dispatch(getPartnersAction());
+    }, 2000);
+    closeEditModal();
+  }
+
+  const openEditModal = (partner) => {
+    setEditModal(true);
+    const partnerObj = {
+      _id: partner._id,
+      name: partner.name,
+      email: partner.email,
+      role: partner.role,
+      balance: partner.balance,
+      total_staked: partner.total_staked,
+    };
+    setPartner(partnerObj);
+  };
+
+  function handleInputChange(attr, value) {
+    setPartner((partner) => ({
+      ...partner,
+      [attr]: value,
+    }));
+  }
+  const handleSelectChange = (selectedOption) => {
+    setPartner((partner) => ({
+      ...partner,
+      ["role"]: selectedOption.label,
+    }));
+    //console.log(partner.role);
+  };
+
+  const closeEditModal = () => {
+    setEditModal(false);
+  };
+
+  const COLUMNS = [
+    {
+      Header: "Name",
+      Footer: "Name",
+      accessor: "name",
+    },
+    {
+      Header: "Email",
+      Footer: "Email",
+      accessor: "email",
+    },
+    {
+      Header: "Role",
+      Footer: "Role",
+      accessor: "role",
+    },
+    {
+      Header: "Status",
+      Footer: "Status",
+      accessor: "isBlocked",
+    },
+    {
+      Header: "Balance",
+      Footer: "Balance",
+      accessor: "balance",
+    },
+    {
+      Header: "Staked",
+      Footer: "Staked",
+      accessor: "total_staked",
+    },
+    {
+      Header: "Action",
+      Footer: "Action",
+      accessor: "action",
+      Cell: ({ row }) => (
+        <>
+          {/* <button class="btn btn-primary shadow btn-xs sharp me-1" onClick={openEditModal}>
+            <i class="fas fa-pencil-alt"></i>
+          </button> */}
+          <a href="#" class="btn btn-primary shadow btn-xs sharp me-3" onClick={() => openEditModal(row.original)}>
+            <i class="fas fa-pencil-alt"></i>
+          </a>
+
+          <button class="btn btn-danger shadow btn-xs sharp me-1" onClick={() => handleAction(row.original)}>
+            <i class="fa fa-trash"></i>
+          </button>
+        </>
+      ),
+    },
+  ];
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => MOCK_DATA, []);
 
-  const tableInstance = useTable({ columns, data }, useSortBy);
+  useEffect(() => {
+    dispatch(getPartnersAction());
+    console.log(partner.role);
+  }, []);
 
+  const tdata = props.partners.partners;
+  const tableInstance = useTable({ columns, data: tdata }, useSortBy);
   const {
     getTableProps,
     getTableBodyProps,
@@ -32,7 +143,6 @@ const EditProfile = () => {
     rows,
     prepareRow,
   } = tableInstance;
-
   // const [selectOption , setSelectOption] = useState('Gender');
   const [dateRange, setDateRange] = useState({ startDate: null, endDate: null });
 
@@ -50,6 +160,117 @@ const EditProfile = () => {
 
   return (
     <>
+      <Modal className="modal fade" show={editModal} onHide={() => closeEditModal()}>
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Create New Pool</h5>
+            <Button variant="" type="button" className="close" x data-dismiss="modal" onClick={() => closeEditModal()}>
+              <span>×</span>
+            </Button>
+          </div>
+          <div className="modal-body">
+            {/* Form for Pool Creation */}
+            <form className="comment-form" onSubmit={(e) => handleUpdatePartner(e)}>
+              <div className="row">
+                <div className="col-lg-8">
+                  <div className="form-group mb-3">
+                    <label htmlFor="author" className="text-black font-w600">
+                      {" "}
+                      Name <span className="required">*</span>
+                      {""}
+                    </label>
+                    <input type="text" value={partner.name} className="form-control" onChange={(e) => handleInputChange("name", e.target.value)} name="partnerName" placeholder="Enter Pool Name" />
+                    {/* <input type="text" value={pool._id} style={{ visibility: "hidden" }} name="poolId" placeholder="POOL_ID" /> */}
+
+                    {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
+                  </div>
+                </div>
+                <div className="col-lg-8">
+                  <div className="form-group mb-3">
+                    <label htmlFor="author" className="text-black font-w600">
+                      {" "}
+                      Email <span className="required">*</span>
+                      {""}
+                    </label>
+                    <input type="text" value={partner.email} className="form-control" onChange={(e) => handleInputChange("email", e.target.value)} name="poolName" placeholder="Enter Pool Name" />
+                    {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
+                  </div>
+                </div>
+
+                <div className="col-lg-8">
+                  <div className="form-group mb-3">
+                    <label htmlFor="author" className="text-black font-w600">
+                      Role
+                    </label>
+                    <Select
+                      options={[
+                        { value: "1", label: "admin" },
+                        { value: "2", label: "partner" },
+                      ]}
+                      className="custom-react-select"
+                      defaultValue={partner.role}
+                      onChange={handleSelectChange}
+                      isSearchable={true}
+                      placeholder={"Select Role"}
+                    />
+                    {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
+                  </div>
+                </div>
+                <div className="col-lg-8">
+                  <div className="form-group mb-3">
+                    <label htmlFor="author" className="text-black font-w600">
+                      {" "}
+                      Balance <span className="required">*</span>
+                      {""}
+                    </label>
+                    <input
+                      type="number"
+                      value={partner.balance}
+                      className="form-control"
+                      onChange={(e) => handleInputChange("balance", e.target.value)}
+                      name="poolName"
+                      placeholder="Enter Pool Name"
+                    />
+                    {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
+                  </div>
+                </div>
+                <div className="col-lg-8">
+                  <div className="form-group mb-3">
+                    <label htmlFor="author" className="text-black font-w600">
+                      {" "}
+                      Staked <span className="required">*</span>
+                      {""}
+                    </label>
+                    <input
+                      type="number"
+                      value={partner.total_staked}
+                      className="form-control"
+                      onChange={(e) => handleInputChange("total_staked", e.target.value)}
+                      name="poolName"
+                      placeholder="Enter Pool Name"
+                    />
+                    {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  value={partner.role}
+                  style={{ visibility: "hidden" }}
+                  className="form-control"
+                  onChange={(e) => handleInputChange("role", e.target.value)}
+                  name="poolName"
+                  placeholder="Enter Pool Name"
+                />
+                <div className="col-lg-12">
+                  <div className="form-group mb-3">
+                    <input type="submit" value="Update" className="submit btn btn-primary" name="submit" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Modal>
       <div className="row">
         <div className="card">
           <div className="card-body">
@@ -154,6 +375,21 @@ const EditProfile = () => {
                       return (
                         <tr {...row.getRowProps()}>
                           {row.cells.map((cell) => {
+                            if (cell.render("Cell").props.value === true) {
+                              return (
+                                <td class="text-danger" {...cell.getCellProps()}>
+                                  {" "}
+                                  Blocked{" "}
+                                </td>
+                              );
+                            } else if (cell.render("Cell").props.value === false) {
+                              return (
+                                <td class="text-success" {...cell.getCellProps()}>
+                                  {" "}
+                                  Not Blocked{" "}
+                                </td>
+                              );
+                            }
                             return <td {...cell.getCellProps()}> {cell.render("Cell")} </td>;
                           })}
                         </tr>
@@ -170,4 +406,10 @@ const EditProfile = () => {
     </>
   );
 };
-export default EditProfile;
+
+const mapStateToProps = (state) => ({
+  partners: state.partners,
+  showLoading: state.showLoading,
+  error: state.error,
+});
+export default connect(mapStateToProps)(ManagePartners);
