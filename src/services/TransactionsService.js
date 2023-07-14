@@ -1,9 +1,9 @@
 import axiosInstance from "./AxiosInstance";
 import swal from "sweetalert";
 
-//Read All transactions of a logged in User
+//Read All withdraw Transactions for Admin
 export function getWithdrawlRequestTransactions() {
-  const url = process.env.REACT_APP_MYARBIT_HostUrl + "transactions//withdraw-requests";
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "transactions/withdraw-requests";
   //console.log(localStorage.jwt);
   let token = JSON.parse(localStorage.jwt);
 
@@ -29,6 +29,17 @@ export function getTransactions() {
     },
   };
   return axiosInstance.get(url, config);
+}
+
+//Update a partner on Server
+export function updateWithdrawRequest(_transactionId, _partnerId) {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "transactions/updateStatus";
+  let token = JSON.parse(localStorage.jwt);
+  const headers = {
+    "Content-Type": "application/json",
+    "x-auth-token": token,
+  };
+  return axiosInstance.put(url, { id: _transactionId, partnerId: _partnerId }, { headers });
 }
 
 export function formatStakings(stakingsData) {
