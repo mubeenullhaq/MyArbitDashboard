@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
+import { Dropdown, Button, Modal } from "react-bootstrap";
 
 //import { Dropdown } from 'react-bootstrap';
 import { Link } from "react-router-dom";
@@ -8,10 +9,10 @@ import Select from "react-select";
 import user from "./../../../images/profile/user.png";
 
 import { useTable, useSortBy } from "react-table";
-import { getWithdrawlRequestTransactionsAction } from "../../../store/actions/TransactionsActions";
+import { getWithdrawlRequestTransactionsAction, updateWithdrawRequestAction } from "../../../store/actions/TransactionsActions";
 
 import MOCK_DATA from "../components/SortingTable/MOCK_DATA_2.json";
-import { COLUMNS } from "../components/SortingTable/Columns";
+//import { COLUMNS } from "../components/SortingTable/Columns"
 
 const options3 = [
   { value: "1", label: "Russia" },
@@ -21,9 +22,90 @@ const options3 = [
 ];
 
 const ManageFunds = (props) => {
+  const COLUMNS = [
+    {
+      Header: "Type",
+      Footer: "Type",
+      accessor: "type",
+    },
+    {
+      Header: "Name",
+      Footer: "Name",
+      accessor: "partner_id.name",
+    },
+    {
+      Header: "Email",
+      Footer: "Email",
+      accessor: "partner_id.email",
+    },
+    {
+      Header: "Wallet",
+      Footer: "Wallet",
+      accessor: "partner_id.wallet_address",
+    },
+
+    {
+      Header: "Status",
+      Footer: "Status",
+      accessor: "status",
+    },
+    {
+      Header: "Amount",
+      Footer: "Amount",
+      accessor: "amount",
+    },
+    {
+      Header: "Balance",
+      Footer: "Balance",
+      accessor: "partner_id.balance",
+    },
+    {
+      Header: "Created At",
+      Footer: "Created At",
+      accessor: "created_at",
+    },
+    {
+      Header: "Action",
+      Footer: "Action",
+      accessor: "action",
+      Cell: ({ row }) => (
+        <>
+          {/* <button class="btn btn-primary shadow btn-xs sharp me-1" onClick={openEditModal}>
+            <i class="fas fa-pencil-alt"></i>
+          </button> */}
+          <a href="#" class="btn btn-primary shadow btn-xs sharp me-3" onClick={() => openEditModal(row.original)}>
+            <i class="fas fa-pencil-alt"></i>
+          </a>
+        </>
+      ),
+    },
+  ];
+  const [editModal, setEditModal] = useState(false);
+  const [transactionType, setTransactionType] = useState("");
+  const [partnerId, setPartnerId] = useState("");
+  const [partnerName, setPartnerName] = useState("");
+  const [partnerEmail, setPartnerEmail] = useState("");
+  const [withdrawAmount, setWithdrawAmount] = useState("");
+  const [partnerBalance, setPartnerBalance] = useState("");
+  const [transactionId, setTransactionId] = useState("");
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => MOCK_DATA, []);
   const dispatch = useDispatch();
+
+  const openEditModal = (transaction) => {
+    setEditModal(true);
+    setTransactionId(transaction._id);
+    setTransactionType(transaction.type);
+    setPartnerId(transaction.partner_id._id);
+    setPartnerName(transaction.partner_id.name);
+    setPartnerEmail(transaction.partner_id.email);
+    setWithdrawAmount(transaction.amount);
+    setPartnerBalance(transaction.partner_id.balance);
+  };
+
+  const closeEditModal = () => {
+    setEditModal(false);
+  };
 
   useEffect(() => {
     console.log("Component mounted");
@@ -43,11 +125,13 @@ const ManageFunds = (props) => {
   // const [selectOption , setSelectOption] = useState('Gender');
   const [dateRange, setDateRange] = useState({ startDate: null, endDate: null });
 
-  const handleFormSubmit = (e) => {
+  const handleUpdateTransaction = (e) => {
     e.preventDefault();
-    // Access the selected date range
-    console.log("Selected date range:", dateRange);
-    // Further processing or submission logic
+    dispatch(updateWithdrawRequestAction(transactionId, partnerId));
+    setTimeout(() => {
+      dispatch(getWithdrawlRequestTransactionsAction());
+    }, 2000);
+    closeEditModal();
   };
 
   const handleDateRangeChange = (startDate, endDate) => {
@@ -57,6 +141,77 @@ const ManageFunds = (props) => {
 
   return (
     <>
+      {/******************************** Update Transaction Status Modal ***************************/}
+      <div className="row">
+        <Modal className="modal fade" show={editModal} onHide={() => closeEditModal()}>
+          <div className="modal-content" style={{ overflow: "hidden" }}>
+            <div className="modal-header">
+              <h5 className="modal-title">Create New Pool</h5>
+              <Button variant="" type="button" className="close" x data-dismiss="modal" onClick={() => closeEditModal()}>
+                <span>×</span>
+              </Button>
+            </div>
+            <div className="modal-body">
+              {/* Form for Pool Creation */}
+              <form className="comment-form" onSubmit={(e) => handleUpdateTransaction(e)}>
+                {/* <div className="row"> */}
+                <div className="row">
+                  <div className="col">
+                    <div className="form-group mb-3">
+                      <h3 htmlFor="author" className="text-black font-w600">
+                        {" "}
+                        Are you sure you want to approve the following transaction?
+                        {""}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <table className="table verticle-middle table-responsive-md">
+                      <thead>
+                        <tr>
+                          <th scope="col">Type</th>
+                          <th scope="col">Name</th>
+                          {/* <th scope="col">Email</th> */}
+                          <th scope="col">Amount</th>
+                          <th scope="col">Balance</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{transactionType}</td>
+                          <td>{partnerName}</td>
+                          {/* <td>{partnerEmail}</td> */}
+                          <td>{withdrawAmount}</td>
+                          <td> {partnerBalance}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className="col-lg-12 text-center">
+                  <div class="row justify-content-center">
+                    <div class="col">
+                      <div className="form-group mb-3">
+                        <input type="submit" value="Approve" className="submit btn btn-success" name="submit" />
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="form-group mb-3">
+                        <input type="button" value="Don't Approve" className="submit btn btn-danger" onClick={() => closeEditModal()} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* </div> */}
+              </form>
+            </div>
+          </div>
+        </Modal>
+      </div>
+
       {/******************************** Cards to show Totals ***************************/}
       <div className="row">
         <div className="col">
