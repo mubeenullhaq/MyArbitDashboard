@@ -100,9 +100,7 @@ const Pools = (props) => {
     }
     //console.log(e);
     //reduxDispatch(createStakingsAction());
-    reduxDispatch(
-      createStakingsAction(stakeAmount, poolId, autoStake, navigate)
-    );
+    reduxDispatch(createStakingsAction(stakeAmount, poolId, autoStake, navigate));
     closeModal(index);
     /* {
       Model should be closed here.
@@ -147,85 +145,35 @@ const Pools = (props) => {
                         <td>{pool.min_stake}</td>
                         <td>{pool.profit + "%"}</td>
                         <td>
-                          <Button
-                            as="a"
-                            href="#"
-                            className="btn btn-primary mb-1 ms-1"
-                            onClick={() => openModal(index)}
-                          >
+                          <Button as="a" href="#" className="btn btn-primary mb-1 ms-1" onClick={() => openModal(index)}>
                             Stake
                           </Button>
-                          <Modal
-                            className="modal fade"
-                            show={modalVisibility[index]}
-                            onHide={() => closeModal(index)}
-                          >
+                          <Modal className="modal fade" show={modalVisibility[index]} onHide={() => closeModal(index)}>
                             <div className="modal-content">
                               <div className="modal-header">
-                                <h5 className="modal-title">
-                                  Specify Staking Amount
-                                </h5>
-                                <Button
-                                  variant=""
-                                  type="button"
-                                  className="close"
-                                  x
-                                  data-dismiss="modal"
-                                  onClick={() => closeModal(index)}
-                                >
+                                <h5 className="modal-title">Specify Staking Amount</h5>
+                                <Button variant="" type="button" className="close" x data-dismiss="modal" onClick={() => closeModal(index)}>
                                   <span>×</span>
                                 </Button>
                               </div>
                               <div className="modal-body">
-                                <form
-                                  className="comment-form"
-                                  onSubmit={(e) =>
-                                    handleCreateStaking(e, index)
-                                  }
-                                >
+                                <form className="comment-form" onSubmit={(e) => handleCreateStaking(e, index)}>
                                   <div className="row">
                                     <div className="col-lg-8">
                                       <div className="form-group mb-3">
-                                        <label
-                                          htmlFor="author"
-                                          className="text-black font-w600"
-                                        >
+                                        <label htmlFor="author" className="text-black font-w600">
                                           {" "}
-                                          Amount{" "}
-                                          <span className="required">*</span>
+                                          Amount <span className="required">*</span>
                                           {""}
                                         </label>
-                                        <input
-                                          type="text"
-                                          className="form-control"
-                                          onChange={(e) =>
-                                            setStakeAmount(e.target.value)
-                                          }
-                                          name="stakeAmount"
-                                          placeholder="Enter Staking Amount"
-                                        />
-                                        {errors.amount && (
-                                          <div className="text-danger fs-12">
-                                            {errors.amount}
-                                          </div>
-                                        )}
-                                        <input
-                                          type="text"
-                                          value={pool._id}
-                                          style={{ visibility: "hidden" }}
-                                          onChange={(e) =>
-                                            setStakeAmount(e.target.value)
-                                          }
-                                          name="poolId"
-                                          placeholder="Author"
-                                        />
+                                        <input type="text" className="form-control" onChange={(e) => setStakeAmount(e.target.value)} name="stakeAmount" placeholder="Enter Staking Amount" />
+                                        {errors.amount && <div className="text-danger fs-12">{errors.amount}</div>}
+                                        <input type="text" value={pool._id} style={{ visibility: "hidden" }} onChange={(e) => setStakeAmount(e.target.value)} name="poolId" placeholder="Author" />
                                         <input
                                           type="text"
                                           value={pool.min_stake}
                                           style={{ visibility: "hidden" }}
-                                          onChange={(e) =>
-                                            setStakeAmount(e.target.value)
-                                          }
+                                          onChange={(e) => setStakeAmount(e.target.value)}
                                           name="minStake"
                                           placeholder="Author"
                                         />
@@ -233,12 +181,7 @@ const Pools = (props) => {
                                     </div>
                                     <div className="col-lg-12">
                                       <div className="form-group mb-3">
-                                        <input
-                                          type="submit"
-                                          value="Confirm Staking"
-                                          className="submit btn btn-primary"
-                                          name="submit"
-                                        />
+                                        <input type="submit" value="Confirm Staking" className="submit btn btn-primary" name="submit" />
                                       </div>
                                       <div class="form-check form-switch">
                                         <input
@@ -251,10 +194,7 @@ const Pools = (props) => {
                                           checked={autoStakIsChecked}
                                           onChange={toggleSwitch}
                                         />
-                                        <label
-                                          class="form-check-label"
-                                          for="flexSwitchCheckChecked"
-                                        >
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">
                                           Turn Auto Restake On
                                         </label>
                                       </div>
