@@ -1,9 +1,6 @@
 import React, { useState, useEffect, Fragment, Suspense } from "react";
 import { connect, useDispatch } from "react-redux";
-import {
-  getTransactionsAction,
-  loadingToggleAction,
-} from "../../store/actions/TransactionsActions";
+import { getTransactionsAction, loadingToggleAction } from "../../store/actions/TransactionsActions";
 
 const Transactions = (props) => {
   const dispatch = useDispatch();
@@ -37,6 +34,7 @@ const Transactions = (props) => {
                       <th scope="col">Transaction Type</th>
                       <th scope="col">Transaction Amount</th>
                       <th scope="col">Created At</th>
+                      <th scope="col">Status</th>
                       {/* <th scope="col">Action</th> */}
                     </tr>
                   </thead>
@@ -44,10 +42,14 @@ const Transactions = (props) => {
                     {props.transactions.transactions &&
                       props.transactions.transactions.map((transaction) => (
                         <tr key={transaction.id}>
-                          <td><span class={(transaction.type === "deposit") ? "badge bg-success badge-lg" : "badge-danger badge badge-lg"}>{transaction.type}</span>
-                            </td>
+                          <td>
+                            <span class={transaction.type === "deposit" ? "badge bg-success badge-lg" : "badge-danger badge badge-lg"}>{transaction.type}</span>
+                          </td>
                           <td>{transaction.amount}</td>
                           <td>{transaction.created_at}</td>
+                          <td>
+                            <span class={transaction.status === "Served" ? "text-success" : "text-danger"}>{transaction.status}</span>
+                          </td>
                         </tr>
                       ))}
                   </tbody>
