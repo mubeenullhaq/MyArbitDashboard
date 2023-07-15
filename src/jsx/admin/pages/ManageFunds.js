@@ -139,6 +139,20 @@ const ManageFunds = (props) => {
     setDateRange({ startDate, endDate });
   };
 
+  const formatDate = (dateTimeString) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      timeZone: "UTC",
+    };
+    const formattedDate = new Date(dateTimeString).toLocaleString("en-US", options);
+    return formattedDate;
+  };
+
   return (
     <>
       {/******************************** Update Transaction Status Modal ***************************/}
@@ -344,6 +358,10 @@ const ManageFunds = (props) => {
                       return (
                         <tr {...row.getRowProps()}>
                           {row.cells.map((cell) => {
+                            if (cell.render("Cell").props.cell.column.Header === "Created At") {
+                              // if (cell.render("Cell").props.value === "Created At") {
+                              return <td {...cell.getCellProps()}>{formatDate(cell.render("Cell").props.value)}</td>;
+                            }
                             return <td {...cell.getCellProps()}> {cell.render("Cell")} </td>;
                           })}
                         </tr>
