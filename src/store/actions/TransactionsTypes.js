@@ -4,6 +4,8 @@ export const CONFIRMED_CREATE_TRANSACTIONS_ACTION = "[transactions Action] Confi
 //export const GET_POOLSS = '[transactions Action] Get POOLSs';
 export const CONFIRMED_GET_TRANSACTIONS_ACTION = "[transactions Action] Confirmed Get Transactions";
 
+export const CONFIRMED_GET_TOTALS_ACTION = "[transactions Action] Confirmed Get Totals";
+
 export const CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION = "[transactions Action] Confirmed Get Withdrawl Request Transactions";
 
 export const CONFIRMED_UPDATE_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION = "[transactions Action] Confirmed Update Withdrawl Request Transactions";
