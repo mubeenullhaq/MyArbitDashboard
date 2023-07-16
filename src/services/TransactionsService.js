@@ -1,21 +1,6 @@
 import axiosInstance from "./AxiosInstance";
 import swal from "sweetalert";
 
-//Read All withdraw Transactions for Admin
-export function getWithdrawlRequestTransactions() {
-  const url = process.env.REACT_APP_MYARBIT_HostUrl + "transactions/withdraw-requests";
-  //console.log(localStorage.jwt);
-  let token = JSON.parse(localStorage.jwt);
-
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      "x-auth-token": token,
-    },
-  };
-  return axiosInstance.get(url, config);
-}
-
 //Read All transactions of a logged in User
 export function getTransactions() {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "transactions";
@@ -31,7 +16,36 @@ export function getTransactions() {
   return axiosInstance.get(url, config);
 }
 
-//Update a partner on Server
+//Read Totals for Admin
+export function getTotals() {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "totals";
+  let token = JSON.parse(localStorage.jwt);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    },
+  };
+  return axiosInstance.get(url, config);
+}
+
+//Read All withdraw Transactions for Admin
+export function getWithdrawlRequestTransactions() {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "transactions/withdraw-requests";
+  //console.log(localStorage.jwt);
+  let token = JSON.parse(localStorage.jwt);
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    },
+  };
+  return axiosInstance.get(url, config);
+}
+
+//Update a withdrawl request Status on Server for Admin
 export function updateWithdrawRequest(_transactionId, _partnerId) {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "transactions/updateStatus";
   let token = JSON.parse(localStorage.jwt);
