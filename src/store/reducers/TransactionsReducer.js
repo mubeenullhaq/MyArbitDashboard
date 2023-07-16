@@ -1,5 +1,6 @@
 import {
   CONFIRMED_GET_TRANSACTIONS_ACTION,
+  CONFIRMED_GET_TOTALS_ACTION,
   CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION,
   GET_TRANSACTIONS_FAILED_ACTION,
   LOADING_TOGGLE_ACTION,
@@ -8,6 +9,7 @@ import {
 
 const initialState = {
   transactions: [],
+  totals: [],
   showLoading: false,
   error: null,
 };
@@ -26,6 +28,12 @@ export default function TransactionsReducer(state = initialState, action) {
         showLoading: false,
       };
 
+    case CONFIRMED_GET_TOTALS_ACTION:
+      return {
+        ...state,
+        totals: action.payload,
+        showLoading: false,
+      };
     case CONFIRMED_GET_WITHRAWAL_REQUEST_TRANSACTIONS_ACTION:
       return {
         ...state,
