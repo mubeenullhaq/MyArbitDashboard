@@ -375,7 +375,7 @@ const ManagePartners = (props) => {
                       defaultChecked={isReferred}
                     />
                     <label className="form-check-label" htmlFor="check1">
-                      User Signed Up Using Referal Code
+                      Partners Signed Up Using Referal Code
                     </label>
                   </div>
                 </div>
