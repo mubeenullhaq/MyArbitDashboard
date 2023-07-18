@@ -1,5 +1,5 @@
-import { getPartners, updatePartner, blockPartner } from "../../services/PartnersService";
-import { CONFIRMED_GET_PARTNERS_ACTION, FAILED_GET_PARTNERS_ACTION, CONFIRMED_UPDATE_PARTNER_ACTION } from "./PartnersTypes";
+import { getPartners, partnerSearch, updatePartner, blockPartner, formatError } from "../../services/PartnersService";
+import { CONFIRMED_GET_PARTNERS_ACTION, FAILED_GET_PARTNERS_ACTION, CONFIRMED_UPDATE_PARTNER_ACTION, PARTNERS_NOT_FOUND_ACTION } from "./PartnersTypes";
 
 //Action for reading all the partners
 export function getPartnersAction() {
@@ -16,10 +16,31 @@ export function getPartnersAction() {
   };
 }
 
-export function confirmedGetPartnersAction(pools) {
+export function confirmedGetPartnersAction(partners) {
   return {
     type: CONFIRMED_GET_PARTNERS_ACTION,
-    payload: pools,
+    payload: partners,
+  };
+}
+
+//Action for Searching Partners based on filters applied admin only
+export function partnerSearchAction(_dateRange, _country, _balanceFrom, _balanceTo, _stakeFrom, _stakeTo, _isReferred) {
+  return (dispatch, getState) => {
+    partnerSearch(_dateRange, _country, _balanceFrom, _balanceTo, _stakeFrom, _stakeTo, _isReferred)
+      .then((response) => {
+        dispatch(confirmedGetPartnersAction(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        const errorMessage = formatError(error.response.data);
+        dispatch(notFoundPartners(errorMessage));
+      });
+  };
+}
+export function notFoundPartners(error) {
+  return {
+    type: PARTNERS_NOT_FOUND_ACTION,
+    payload: error,
   };
 }
 

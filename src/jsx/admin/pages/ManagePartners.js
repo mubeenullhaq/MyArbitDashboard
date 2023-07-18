@@ -6,12 +6,13 @@ import { Dropdown, Button, Modal } from "react-bootstrap";
 import DateRangePicker from "react-bootstrap-daterangepicker";
 
 import { useTable, useSortBy } from "react-table";
-import { getPartnersAction, updatePartnerAction, blockPartnerAction } from "../../../store/actions/PartnersActions";
+import { getPartnersAction, updatePartnerAction, blockPartnerAction, partnerSearchAction } from "../../../store/actions/PartnersActions";
 
 import PageTitle from "../../layouts/PageTitle";
 import MOCK_DATA from "../components/SortingTable/MOCK_DATA_2.json";
 
 const options3 = [
+  { value: "", label: "No Country Selected" },
   { value: "1", label: "Russia" },
   { value: "2", label: "Canada" },
   { value: "3", label: "China" },
@@ -56,12 +57,12 @@ const ManagePartners = (props) => {
     setPartner(partnerObj);
   };
 
-  function handleInputChange(attr, value) {
+  const handleInputChange = (attr, value) => {
     setPartner((partner) => ({
       ...partner,
       [attr]: value,
     }));
-  }
+  };
   const handleSelectChange = (selectedOption) => {
     setPartner((partner) => ({
       ...partner,
@@ -106,6 +107,16 @@ const ManagePartners = (props) => {
       accessor: "total_staked",
     },
     {
+      Header: "IsReferred",
+      Footer: "IsReferred",
+      accessor: "is_referred",
+    },
+    {
+      Header: "Joined",
+      Footer: "Joined",
+      accessor: "created_at",
+    },
+    {
       Header: "Action",
       Footer: "Action",
       accessor: "action",
@@ -145,21 +156,46 @@ const ManagePartners = (props) => {
   } = tableInstance;
   // const [selectOption , setSelectOption] = useState('Gender');
   const [dateRange, setDateRange] = useState({ startDate: null, endDate: null });
+  const [country, setCountry] = useState();
+  const [isReferred, setIsReferred] = useState(true);
+  const [balanceFrom, setBalanceFrom] = useState();
+  const [balanceTo, setBalanceTo] = useState();
+  const [stakeFrom, setStakeFrom] = useState();
+  const [stakeTo, setStakeTo] = useState();
+  const handleSelectCountry = (selectedOption) => {
+    setCountry(selectedOption.label);
+  };
 
-  const handleFormSubmit = (e) => {
+  const handleSearchPartner = (e) => {
     e.preventDefault();
     // Access the selected date range
     console.log("Selected date range:", dateRange);
+    dispatch(partnerSearchAction(dateRange, country, balanceFrom, balanceTo, stakeFrom, stakeTo, isReferred));
     // Further processing or submission logic
   };
 
   const handleDateRangeChange = (startDate, endDate) => {
     // Update the selected date range in state
     setDateRange({ startDate, endDate });
+    console.log(dateRange);
+  };
+  const formatDate = (dateTimeString) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      timeZone: "UTC",
+    };
+    const formattedDate = new Date(dateTimeString).toLocaleString("en-US", options);
+    return formattedDate;
   };
 
   return (
     <>
+      {/******************************* Modal to update Partner Data *****************************************/}
       <Modal className="modal fade" show={editModal} onHide={() => closeEditModal()}>
         <div className="modal-content">
           <div className="modal-header">
@@ -271,40 +307,42 @@ const ManagePartners = (props) => {
           </div>
         </div>
       </Modal>
+      {/******************************* Filters *****************************************/}
       <div className="row">
         <div className="card">
           <div className="card-body">
             <h1>Filter By</h1>
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleSearchPartner}>
               <div className="row">
                 <div className="col">
                   <p className="mb-1">Date Range</p>
                   <DateRangePicker
                     initialSettings={{
-                      startDate: "10/5/2022",
-                      endDate: "3/6/2022",
                       showDropdowns: true,
                       showYearDropdown: true,
                     }}
-                    onApply={(event, picker) => handleDateRangeChange(picker.startDate, picker.endDate)}
+                    onApply={(event, picker) => {
+                      console.log("aaa");
+                      handleDateRangeChange(picker.startDate, picker.endDate);
+                    }}
                   >
                     <input type="text" className="form-control input-daterange-timepicker" />
                   </DateRangePicker>
                 </div>
                 <div className="col">
                   <label className="form-label">Country</label>
-                  <Select options={options3} className="custom-react-select" defaultValue={""} isSearchable={true} placeholder={"Select Country"} />
+                  <Select options={options3} onChange={handleSelectCountry} className="custom-react-select" defaultValue={""} isSearchable={true} placeholder={"Select Country"} />
                 </div>
                 <div className="col">
                   <div className="row">
                     <div className="col">
                       <label className="form-label">Balance From</label>
-                      <input type="number" className="form-control" defaultValue={""} placeholder="" />
+                      <input type="number" value={balanceFrom} className="form-control" onChange={(e) => setBalanceFrom(e.target.value)} defaultValue={""} placeholder="" />
                     </div>
 
                     <div className="col">
                       <label className="form-label">Balance to</label>
-                      <input type="number" className="form-control" defaultValue="" placeholder="" />
+                      <input value={balanceTo} className="form-control" onChange={(e) => setBalanceTo(e.target.value)} defaultValue={""} placeholder="" />
                     </div>
                   </div>
                 </div>
@@ -314,22 +352,39 @@ const ManagePartners = (props) => {
                   <div className="row">
                     <div className="col">
                       <label className="form-label">Stake From</label>
-                      <input type="number" className="form-control" defaultValue={""} placeholder="" />
+                      <input value={stakeFrom} className="form-control" onChange={(e) => setStakeFrom(e.target.value)} defaultValue={""} placeholder="" />
                     </div>
 
                     <div className="col">
                       <label className="form-label">Stake to</label>
-                      <input type="number" className="form-control" defaultValue="" placeholder="" />
+                      <input value={stakeTo} className="form-control" onChange={(e) => setStakeTo(e.target.value)} defaultValue={""} placeholder="" />
                     </div>
                   </div>
                 </div>
                 <div className="col">
                   <div className="form-check form-check-inline"></div>
                   <div className="form-check mb-2">
-                    <input type="checkbox" className="form-check-input" id="check1" value="" defaultChecked />
+                    <input
+                      type="checkbox"
+                      className="form-check-input"
+                      onChange={(e) => {
+                        setIsReferred(e.target.checked);
+                        console.log(isReferred);
+                      }}
+                      id="check1"
+                      defaultChecked={isReferred}
+                    />
                     <label className="form-check-label" htmlFor="check1">
                       User Signed Up Using Referal Code
                     </label>
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-check form-check-inline"></div>
+                  <div className="form-check mb-2">
+                    <button href="#" class="btn btn-primary shadow " onClick={() => console.log("clicked")}>
+                      Search
+                    </button>
                   </div>
                 </div>
               </div>
@@ -337,7 +392,7 @@ const ManagePartners = (props) => {
           </div>
         </div>
       </div>
-      {/* Table to show Partners */}
+      {/******************************* Table to show Partners *****************************************/}
       <div className="row">
         <div className="col">
           <div className="card profile-card card-bx m-b30">
@@ -375,20 +430,37 @@ const ManagePartners = (props) => {
                       return (
                         <tr {...row.getRowProps()}>
                           {row.cells.map((cell) => {
-                            if (cell.render("Cell").props.value === true) {
+                            if (cell.render("Cell").props.column.Header == "Status" && cell.render("Cell").props.value === true) {
                               return (
                                 <td class="text-danger" {...cell.getCellProps()}>
                                   {" "}
                                   Blocked{" "}
                                 </td>
                               );
-                            } else if (cell.render("Cell").props.value === false) {
+                            } else if (cell.render("Cell").props.column.Header == "Status" && cell.render("Cell").props.value === false) {
                               return (
                                 <td class="text-success" {...cell.getCellProps()}>
                                   {" "}
                                   Not Blocked{" "}
                                 </td>
                               );
+                            } else if (cell.render("Cell").props.column.Header == "IsReferred" && cell.render("Cell").props.value === true) {
+                              return (
+                                <td class="text-success" {...cell.getCellProps()}>
+                                  {" "}
+                                  Reffered{" "}
+                                </td>
+                              );
+                            } else if (cell.render("Cell").props.column.Header == "IsReferred" && cell.render("Cell").props.value === false) {
+                              return (
+                                <td class="text-danger" {...cell.getCellProps()}>
+                                  {" "}
+                                  Not Reffered{" "}
+                                </td>
+                              );
+                            } else if (cell.render("Cell").props.cell.column.Header === "Joined") {
+                              // if (cell.render("Cell").props.value === "Created At") {
+                              return <td {...cell.getCellProps()}>{formatDate(cell.render("Cell").props.value)}</td>;
                             }
                             return <td {...cell.getCellProps()}> {cell.render("Cell")} </td>;
                           })}
