@@ -179,6 +179,11 @@ const ManagePartners = (props) => {
     setDateRange({ startDate, endDate });
     console.log(dateRange);
   };
+
+  const HandleClearFilters = () => {
+    dispatch(getPartnersAction());
+  };
+
   const formatDate = (dateTimeString) => {
     const options = {
       year: "numeric",
@@ -382,8 +387,16 @@ const ManagePartners = (props) => {
                 <div className="col">
                   <div className="form-check form-check-inline"></div>
                   <div className="form-check mb-2">
-                    <button href="#" class="btn btn-primary shadow " onClick={() => console.log("clicked")}>
+                    <button href="#" type="submit" class="btn btn-primary shadow " onClick={() => console.log("clicked")}>
                       Search
+                    </button>
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="form-check form-check-inline"></div>
+                  <div className="form-check mb-2">
+                    <button type="button" href="#" class="btn btn-primary shadow " onClick={HandleClearFilters}>
+                      Clear Filters
                     </button>
                   </div>
                 </div>
