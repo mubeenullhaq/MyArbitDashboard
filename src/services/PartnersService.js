@@ -2,6 +2,19 @@ import axiosInstance from "../services/AxiosInstance";
 import swal from "sweetalert";
 
 //Read all partners from Server
+export function getLoggedInParnter() {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "user/profile";
+  let token = JSON.parse(localStorage.jwt);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    },
+  };
+  return axiosInstance.get(url, config);
+}
+
+//Read all partners from Server
 export function getPartners() {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "user";
   let token = JSON.parse(localStorage.jwt);
@@ -14,7 +27,7 @@ export function getPartners() {
   return axiosInstance.get(url, config);
 }
 
-//Read all partners from Server
+//Search partners from Server based on filters provided
 export function partnerSearch(_dateRange, _country, _balanceFrom, _balanceTo, _stakeFrom, _stakeTo, _isReferred) {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "user/search";
   let token = JSON.parse(localStorage.jwt);
@@ -34,7 +47,7 @@ export function partnerSearch(_dateRange, _country, _balanceFrom, _balanceTo, _s
   return axiosInstance.get(url, { params: queryPrams, headers: headers });
 }
 
-//Update a partner on Server
+//Update a partner on Server for admin
 export function updatePartner(_partnerObj) {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "user/update/admin";
   let token = JSON.parse(localStorage.jwt);
@@ -45,7 +58,18 @@ export function updatePartner(_partnerObj) {
   return axiosInstance.put(url, _partnerObj, { headers });
 }
 
-//Block partner
+//Update a Logged In partner
+export function updateLoggedInPartner(_partnerObj) {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "user";
+  let token = JSON.parse(localStorage.jwt);
+  const headers = {
+    "Content-Type": "application/json",
+    "x-auth-token": token,
+  };
+  return axiosInstance.put(url, _partnerObj, { headers });
+}
+
+//Block partner admin Only
 export function blockPartner(_partnerId, _status) {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "user/block";
   let token = JSON.parse(localStorage.jwt);
