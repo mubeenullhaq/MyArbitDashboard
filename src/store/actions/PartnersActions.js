@@ -1,5 +1,21 @@
-import { getPartners, partnerSearch, updatePartner, blockPartner, formatError } from "../../services/PartnersService";
+import { getPartners, partnerSearch, updatePartner, updateLoggedInPartner, blockPartner, getLoggedInParnter, formatError } from "../../services/PartnersService";
 import { CONFIRMED_GET_PARTNERS_ACTION, FAILED_GET_PARTNERS_ACTION, CONFIRMED_UPDATE_PARTNER_ACTION, PARTNERS_NOT_FOUND_ACTION } from "./PartnersTypes";
+import swal from "sweetalert";
+
+//Action for reading Logged In partner
+export function getLoggedInPartnerAction() {
+  return (dispatch, getState) => {
+    getLoggedInParnter()
+      .then((response) => {
+        dispatch(confirmedGetPartnersAction(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+
+        dispatch(getPartnersFailedAction(error.response.data));
+      });
+  };
+}
 
 //Action for reading all the partners
 export function getPartnersAction() {
@@ -44,7 +60,7 @@ export function notFoundPartners(error) {
   };
 }
 
-//Action for updating a Partner
+//Action for updating a Partner for Admins
 export function updatePartnerAction(_partnerObj) {
   return (dispatch, getState) => {
     updatePartner(_partnerObj)
@@ -55,6 +71,36 @@ export function updatePartnerAction(_partnerObj) {
         console.log(error);
         dispatch(getPartnersFailedAction(error.response.data));
       });
+  };
+}
+
+//Action for Updating Logged In partner
+export function updateLoggedInPartnerAction(_partnerObj) {
+  return (dispatch, getState) => {
+    updateLoggedInPartner(_partnerObj)
+      .then((response) => {
+        dispatch(confirmedGetUpdatedPartnerAction(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(updatePartnerFailedAction(error.response.data));
+      });
+  };
+}
+
+export function confirmedGetUpdatedPartnerAction(partners) {
+  swal("Great!", "Your profile data is updated!", "success");
+  return {
+    type: CONFIRMED_GET_PARTNERS_ACTION,
+    payload: partners,
+  };
+}
+
+export function updatePartnerFailedAction(error) {
+  if (error === "User already registed with the email ID.") swal("Oops", "Email Already Registered!", "error");
+  return {
+    type: FAILED_GET_PARTNERS_ACTION,
+    payload: error,
   };
 }
 
