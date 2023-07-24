@@ -1,7 +1,10 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
 
-const BalanceCard = () => {
+const BalanceCard = (props) => {
+  const dispatch = useDispatch();
   const user = JSON.parse(localStorage.userDetails);
+  useEffect(() => {}, [props.partners.partners]);
   return (
     <Fragment>
       <div class="container text-center">
@@ -17,10 +20,7 @@ const BalanceCard = () => {
                     <p className="mb-1">Balance</p>
                     <h3 className="text-white">{user.balance}$</h3>
                     <div className="progress mb-2 bg-secondary">
-                      <div
-                        className="progress-bar progress-animated bg-white"
-                        style={{ width: "30%" }}
-                      ></div>
+                      <div className="progress-bar progress-animated bg-white" style={{ width: "30%" }}></div>
                     </div>
                     <small>30% Increase in 30 Days</small>
                   </div>
@@ -39,10 +39,7 @@ const BalanceCard = () => {
                     <p className="mb-1">Amount Staked</p>
                     <h3 className="text-white">{user.total_staked}$</h3>
                     <div className="progress mb-2 bg-secondary">
-                      <div
-                        className="progress-bar progress-animated bg-white"
-                        style={{ width: "30%" }}
-                      ></div>
+                      <div className="progress-bar progress-animated bg-white" style={{ width: "30%" }}></div>
                     </div>
                     <small>30% Increase in 30 Days</small>
                   </div>
@@ -56,4 +53,9 @@ const BalanceCard = () => {
   );
 };
 
-export default BalanceCard;
+const mapStateToProps = (state) => ({
+  partners: state.partners,
+  showLoading: state.showLoading,
+  error: state.error,
+});
+export default connect(mapStateToProps)(BalanceCard);
