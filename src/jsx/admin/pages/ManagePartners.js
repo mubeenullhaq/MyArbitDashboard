@@ -141,7 +141,6 @@ const ManagePartners = (props) => {
 
   useEffect(() => {
     dispatch(getPartnersAction());
-    console.log(partner.role);
   }, []);
 
   const tdata = props.partners.partners;
