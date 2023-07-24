@@ -69,6 +69,17 @@ export function updateLoggedInPartner(_partnerObj) {
   return axiosInstance.put(url, _partnerObj, { headers });
 }
 
+//Top Up Logged In partner
+export function TopUpLoggedInPartner(_topUpAmount) {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "user/topUp";
+  let token = JSON.parse(localStorage.jwt);
+  const headers = {
+    "Content-Type": "application/json",
+    "x-auth-token": token,
+  };
+  return axiosInstance.put(url, { topUp_amount: _topUpAmount }, { headers });
+}
+
 //Block partner admin Only
 export function blockPartner(_partnerId, _status) {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "user/block";
