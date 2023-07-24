@@ -344,7 +344,7 @@ function MainLayout() {
           </li>
         </ul>
         <Nav />
-        <div className="content-body" style={{ minHeight: window.screen.height - 45 }}>
+        <div className="content-body" style={{ minHeight: window.screen.height - 45, "padding-right": "0px" }}>
           <div className="container-fluid">
             <Card />
             <Outlet />
