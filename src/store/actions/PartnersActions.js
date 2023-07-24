@@ -1,4 +1,4 @@
-import { getPartners, partnerSearch, updatePartner, updateLoggedInPartner, blockPartner, getLoggedInParnter, formatError } from "../../services/PartnersService";
+import { getPartners, partnerSearch, updatePartner, updateLoggedInPartner, blockPartner, getLoggedInParnter, formatError, TopUpLoggedInPartner } from "../../services/PartnersService";
 import { CONFIRMED_GET_PARTNERS_ACTION, FAILED_GET_PARTNERS_ACTION, CONFIRMED_UPDATE_PARTNER_ACTION, PARTNERS_NOT_FOUND_ACTION } from "./PartnersTypes";
 import swal from "sweetalert";
 
@@ -85,6 +85,29 @@ export function updateLoggedInPartnerAction(_partnerObj) {
         console.log(error);
         dispatch(updatePartnerFailedAction(error.response.data));
       });
+  };
+}
+
+//Action for Updating Logged In partner
+export function topUpPartnerAction(_topUpAmount) {
+  return (dispatch, getState) => {
+    TopUpLoggedInPartner(_topUpAmount)
+      .then((response) => {
+        localStorage.setItem("userDetails", JSON.stringify(response.data));
+        dispatch(confirmedTopUpPartnerAction(response.data, _topUpAmount));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(updatePartnerFailedAction(error.response.data));
+      });
+  };
+}
+
+export function confirmedTopUpPartnerAction(_partner, _topUpAmount) {
+  swal("Great!", `You have successfull topped Up ${_topUpAmount}!`, "success");
+  return {
+    type: CONFIRMED_GET_PARTNERS_ACTION,
+    payload: _partner,
   };
 }
 
