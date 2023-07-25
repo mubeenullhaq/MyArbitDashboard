@@ -18,7 +18,7 @@ const Pools = () => {
     { value: "30", label: "Gold Elite" },
     { value: "60", label: "Platinum Elite" },
     { value: "90", label: "Titanium Elite" },
-    { value: "180", label: "Daimond Elite" },
+    { value: "180", label: "Diamond Elite" },
   ];
   const   handlePoolSelect = (selectedOption) => {
     setDays(parseFloat(selectedOption.value))
@@ -231,7 +231,7 @@ const Pools = () => {
                 <div className="mb-3 row">
                   <label className="col-sm-3 col-form-label">Profit</label>
                   <div className="col-sm-9">
-                    <input type="Number" defaultValue={profit}  onChange={(e) => e.preventDefault()} className="form-control" placeholder="Profit" />
+                    <input type="Number" defaultValue={profit} onChange={(e) => e.preventDefault()} className="form-control" placeholder="Profit" />
                   </div>
                 </div>
                 {/* <form onSubmit={(e) => e.preventDefault()}>
@@ -288,7 +288,6 @@ const Pools = () => {
           </div>
         </div>
       </div>
-     
     </Fragment>
   );
 };
