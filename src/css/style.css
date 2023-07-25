@@ -2888,6 +2888,29 @@ textarea.form-control-lg {
   border-radius: 0.75rem;
 }
 
+.input-tier-group {
+  padding: 10px;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.input-group-tier-text {
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0.4rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #362465;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #e9ecef;
+  border: 1px solid #eeee;
+  border-radius: 0.75rem;
+}
 .input-group-lg > .form-control,
 .input-group-lg > .form-select,
 .input-group-lg > .input-group-text,
