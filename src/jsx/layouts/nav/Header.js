@@ -13,6 +13,8 @@ const Header = ({ onNote }) => {
   const [topUpAmount, setTopUpAmount] = useState(0);
   const [rightSelect, setRightSelect] = useState("Eng");
   const dispatch = useDispatch();
+  const partner = JSON.parse(localStorage.userDetails);
+
   //For fix header
   const [headerFix, setheaderFix] = useState(false);
   useEffect(() => {
@@ -123,6 +125,11 @@ const Header = ({ onNote }) => {
               <div className="header-left">
                 <div className="dashboard_bar" style={{ textTransform: "capitalize" }}>
                   {finalName.join(" ").length === 0 ? "Dashboard" : finalName.join(" ") === "dashboard dark" ? "Dashboard" : finalName.join(" ")}
+                </div>
+                <div className="sell-blance">
+                  <div className="input-tier-group">
+                    <span className="input-group-tier-text">Tier &nbsp; &nbsp;{partner.tier}</span>
+                  </div>
                 </div>
               </div>
               <div className="navbar-nav header-right">
