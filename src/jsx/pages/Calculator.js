@@ -14,11 +14,11 @@ const Pools = () => {
   const [profit, setProfit] = useState();
 
   const options3 = [
-    { value: "10", label: "TimeTrove10" },
-    { value: "30", label: "30DayFortune" },
-    { value: "60", label: "60DayBliss" },
-    { value: "90", label: "90DayBountiful" },
-    { value: "180", label: "180DaysHarvest" },
+    { value: "10", label: "Silver Elite" },
+    { value: "30", label: "Gold Elite" },
+    { value: "60", label: "Platinum Elite" },
+    { value: "90", label: "Titanium Elite" },
+    { value: "180", label: "Daimond Elite" },
   ];
   const   handlePoolSelect = (selectedOption) => {
     setDays(parseFloat(selectedOption.value))
@@ -191,7 +191,7 @@ const Pools = () => {
         <div className="col">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Calulate</h4>
+              <h4 className="card-title">Calculate Profit</h4>
             </div>
             <div className="card-body">
               <div className="basic-form">
@@ -211,7 +211,7 @@ const Pools = () => {
                   <div className="mb-3 row">
                     <div className="col-sm-10">
                       <button type="submit" className="btn btn-primary">
-                        Calulate
+                        Calculate
                       </button>
                     </div>
                   </div>
