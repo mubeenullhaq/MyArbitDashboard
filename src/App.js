@@ -15,6 +15,7 @@ import "./css/style.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const SignUp = lazy(() => import("./jsx/pages/Registration"));
+const ReferredSignUp = lazy(() => import("./jsx/pages/ReferredRegistration"));
 const ForgotPassword = lazy(() => import("./jsx/pages/ForgotPassword"));
 const Login = lazy(() => {
   return new Promise((resolve) => {
@@ -37,14 +38,20 @@ function withRouter(Component) {
 function App(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const referralCode = queryParams.get("ref");
+
   useEffect(() => {
-    checkAutoLogin(dispatch, navigate);
+    
+      checkAutoLogin(dispatch, navigate, referralCode);
   }, []);
 
   let routeblog = (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/page-register" element={<SignUp />} />
+      <Route path="/referral" element={<ReferredSignUp />} />
       <Route path="/page-forgot-password" element={<ForgotPassword />} />
     </Routes>
   );
