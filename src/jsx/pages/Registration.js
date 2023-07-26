@@ -27,6 +27,7 @@ function Register(props) {
 
     function onSignUp(e) {
         e.preventDefault();
+		let referralCode = "";
         let error = false;
         const errorObj = { ...errorsObj };
 		if(name === ''){
@@ -49,7 +50,7 @@ function Register(props) {
         setErrors(errorObj);
         if (error) return;
         dispatch(loadingToggleAction(true));
-        dispatch(signupAction(name, email, password, repeat_password, navigate));
+        dispatch(signupAction(name, email, password, repeat_password,referralCode, navigate));
     }
 	
 	return (
