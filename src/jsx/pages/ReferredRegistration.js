@@ -1,62 +1,59 @@
-import React,{useState} from "react";
-import { NavLink ,Link, useLocation, useNavigate } from "react-router-dom";
-import { connect, useDispatch } from 'react-redux';
-import {
-    loadingToggleAction,
-    signupAction,
-} from '../../store/actions/AuthActions';
+import React, { useState } from "react";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
+import { connect, useDispatch } from "react-redux";
+import { loadingToggleAction, signupAction } from "../../store/actions/AuthActions";
 // image
 
-import logo from '../../images/logo/logo-full.png'
-import bg6 from '../../images/background/bg6.jpg';
+import logo from "../../images/logo/logo-full.png";
+import bg6 from "../../images/background/bg6.jpg";
 
 function Register(props) {
-	const location = useLocation();
-  	const queryParams = new URLSearchParams(location.search);
-  	const referralCode = queryParams.get("ref");
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const referralCode = queryParams.get("ref");
 
-	const [heartActive, setHeartActive] = useState(true);
+  const [heartActive, setHeartActive] = useState(true);
 
-    const [name, setName] = useState('asdf');
-    //const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('mb@gmail.com');
-    const [password, setPassword] = useState('123');
-    const [repeat_password, setRepeatPassword] = useState('123');
-   
-	let errorsObj = { name: '', email: '', password: '' , password_mismatch: ''};
-    const [errors, setErrors] = useState(errorsObj);
+  const [name, setName] = useState("asdf");
+  //const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("mb@gmail.com");
+  const [password, setPassword] = useState("123");
+  const [repeat_password, setRepeatPassword] = useState("123");
 
-    const dispatch = useDispatch();
-	const navigate = useNavigate();
+  let errorsObj = { name: "", email: "", password: "", password_mismatch: "" };
+  const [errors, setErrors] = useState(errorsObj);
 
-    function onSignUp(e) {
-        e.preventDefault();
-        let error = false;
-        const errorObj = { ...errorsObj };
-		if(name === ''){
-			errorObj.name = 'Name is Required';
-            error = true;
-        }
-        if (email === '') {
-            errorObj.email = 'Email is Required';
-            error = true;
-        }
-        if (password === '') {
-            errorObj.password = 'Password is Required';
-            error = true;
-        }
-		if(password != repeat_password){
-			errorObj.password_mismatch = 'Password Does not match';
-			error = true;
-		}
-		
-        setErrors(errorObj);
-        if (error) return;
-        dispatch(loadingToggleAction(true));
-        dispatch(signupAction(name, email, password, repeat_password, referralCode, navigate));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function onSignUp(e) {
+    e.preventDefault();
+    let error = false;
+    const errorObj = { ...errorsObj };
+    if (name === "") {
+      errorObj.name = "Name is Required";
+      error = true;
     }
-	
-	return (
+    if (email === "") {
+      errorObj.email = "Email is Required";
+      error = true;
+    }
+    if (password === "") {
+      errorObj.password = "Password is Required";
+      error = true;
+    }
+    if (password != repeat_password) {
+      errorObj.password_mismatch = "Password Does not match";
+      error = true;
+    }
+
+    setErrors(errorObj);
+    if (error) return;
+    dispatch(loadingToggleAction(true));
+    dispatch(signupAction(name, email, password, repeat_password, referralCode, navigate));
+  }
+
+  return (
     <>
       <div className="page-wraper">
         <div className="browse-job login-style3">
@@ -86,9 +83,6 @@ function Register(props) {
                                 <div className="form-group mt-3">
                                   <input value={name} onChange={(e) => setName(e.target.value)} required="" className="form-control" placeholder="Full Name" type="text" />
                                   {errors.name && <div className="text-danger fs-12">{errors.name}</div>}
-                                </div>
-                                <div className="form-group mt-3">
-                                  <input value={referralCode} required="" className="form-control" placeholder="Full Name" type="text" disabled />
                                 </div>
                                 {/* <div className="form-group mt-3">
 																	<input name="dzName2" required="" className="form-control" placeholder="User Name" type="text" />
@@ -173,15 +167,14 @@ function Register(props) {
       </div>
     </>
   );
-};
+}
 
 const mapStateToProps = (state) => {
-    return {
-        errorMessage: state.auth.errorMessage,
-        successMessage: state.auth.successMessage,
-        showLoading: state.auth.showLoading,
-    };
+  return {
+    errorMessage: state.auth.errorMessage,
+    successMessage: state.auth.successMessage,
+    showLoading: state.auth.showLoading,
+  };
 };
 
 export default connect(mapStateToProps)(Register);
-
