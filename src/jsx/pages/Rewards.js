@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, Fragment, Suspense } from "react";
 import { connect, useDispatch } from "react-redux";
-import { getTransactionsAction, loadingToggleAction } from "../../store/actions/TransactionsActions";
+import { getReferredPartnersAction } from "../../store/actions/PartnersActions";
 
-const Transactions = (props) => {
+const Rewards = (props) => {
   const dispatch = useDispatch();
+  const partner = JSON.parse(localStorage.userDetails);
   const [copyButtonText, setCopyButtonText] = useState("Copy");
   const inputRef = useRef(null); // Create a ref to the input element
 
@@ -14,6 +15,9 @@ const Transactions = (props) => {
         .writeText(inputRef.current.value) // Copy the selected text to the clipboard
         .then(() => {
           setCopyButtonText("Copied");
+          setTimeout(() => {
+            setCopyButtonText("Copy");
+          }, 10000);
         })
         .catch((error) => {
           console.error("Error copying text:", error);
@@ -21,8 +25,8 @@ const Transactions = (props) => {
     }
   };
   useEffect(() => {
-    dispatch(loadingToggleAction(true));
-    dispatch(getTransactionsAction());
+    //  dispatch(loadingToggleAction(true));
+    dispatch(getReferredPartnersAction());
   }, []);
   return (
     <Fragment>
@@ -44,7 +48,7 @@ const Transactions = (props) => {
             </div>
             <div className="card-body">
               <div className="input-group mb-3">
-                <input type="text" className="form-control" defaultValue={process.env.REACT_APP_MYARBIT_DashboardUrl + "referral?ref=abc"} disabled ref={inputRef} />
+                <input type="text" className="form-control" defaultValue={process.env.REACT_APP_MYARBIT_DashboardUrl + `referral?ref=${partner.referral_code}`} disabled ref={inputRef} />
                 <button className="btn btn-primary" type="button" onClick={handleCopyClick}>
                   {copyButtonText}
                 </button>
@@ -59,31 +63,31 @@ const Transactions = (props) => {
             </div>
             <div className="card-body">
               <div className="table-responsive recentOrderTable">
-                {/* <table className="table verticle-middle table-responsive-md">
+                <table className="table verticle-middle table-responsive-md">
                   <thead>
                     <tr>
-                      <th scope="col">Transaction Type</th>
-                      <th scope="col">Transaction Amount</th>
-                      <th scope="col">Created At</th>
-                      <th scope="col">Status</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      {/* <th scope="col">Created At</th>
+                      <th scope="col">Status</th> */}
                     </tr>
                   </thead>
                   <tbody>
-                    {props.transactions.transactions &&
-                      props.transactions.transactions.map((transaction) => (
-                        <tr key={transaction.id}>
-                          <td>
-                            <span class={transaction.type === "deposit" ? "badge bg-success badge-lg" : "badge-danger badge badge-lg"}>{transaction.type}</span>
-                          </td>
-                          <td>{transaction.amount}</td>
-                          <td>{transaction.created_at}</td>
-                          <td>
+                    {props.partners.partners &&
+                      props.partners.partners.map((partner) => (
+                        <tr key={partner.id}>
+                          {/* <td>
+                            <span class={partner.type === "deposit" ? "badge bg-success badge-lg" : "badge-danger badge badge-lg"}>{partner.type}</span>
+                          </td> */}
+                          <td>{partner.name}</td>
+                          <td>{partner.email}</td>
+                          {/* <td>
                             <span class={transaction.status === "Served" ? "text-success" : "text-danger"}>{transaction.status}</span>
-                          </td>
+                          </td> */}
                         </tr>
                       ))}
                   </tbody>
-                </table> */}
+                </table>
               </div>
             </div>
           </div>
@@ -94,9 +98,9 @@ const Transactions = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  transactions: state.transactions,
+  partners: state.partners,
   showLoading: state.showLoading,
   error: state.error,
 });
 
-export default connect(mapStateToProps)(Transactions);
+export default connect(mapStateToProps)(Rewards);
