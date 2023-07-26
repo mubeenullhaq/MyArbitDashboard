@@ -1,4 +1,14 @@
-import { getPartners, partnerSearch, updatePartner, updateLoggedInPartner, blockPartner, getLoggedInParnter, formatError, TopUpLoggedInPartner } from "../../services/PartnersService";
+import {
+  getPartners,
+  partnerSearch,
+  updatePartner,
+  updateLoggedInPartner,
+  blockPartner,
+  getLoggedInParnter,
+  formatError,
+  TopUpLoggedInPartner,
+  getReferredPartners,
+} from "../../services/PartnersService";
 import { CONFIRMED_GET_PARTNERS_ACTION, FAILED_GET_PARTNERS_ACTION, CONFIRMED_UPDATE_PARTNER_ACTION, PARTNERS_NOT_FOUND_ACTION } from "./PartnersTypes";
 import swal from "sweetalert";
 
@@ -36,6 +46,21 @@ export function confirmedGetPartnersAction(partners) {
   return {
     type: CONFIRMED_GET_PARTNERS_ACTION,
     payload: partners,
+  };
+}
+
+//Action for reading all referred parnters of a Logged In partner
+export function getReferredPartnersAction() {
+  return (dispatch, getState) => {
+    getReferredPartners()
+      .then((response) => {
+        dispatch(confirmedGetPartnersAction(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+
+        dispatch(getPartnersFailedAction(error.response.data));
+      });
   };
 }
 
