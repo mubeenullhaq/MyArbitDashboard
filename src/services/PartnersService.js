@@ -14,9 +14,22 @@ export function getLoggedInParnter() {
   return axiosInstance.get(url, config);
 }
 
-//Read all partners from Server
+//Read all partners from Server for admins only
 export function getPartners() {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "user";
+  let token = JSON.parse(localStorage.jwt);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    },
+  };
+  return axiosInstance.get(url, config);
+}
+
+//Read all partners from Server for admins only
+export function getReferredPartners() {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "user/referred";
   let token = JSON.parse(localStorage.jwt);
   const config = {
     headers: {
