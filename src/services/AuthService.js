@@ -2,13 +2,14 @@ import axios from "axios";
 import swal from "sweetalert";
 import { loginConfirmedAction, Logout } from "../store/actions/AuthActions";
 
-export function signUp(name, email, password, repeat_password) {
+export function signUp(name, email, password, repeat_password, referralCode) {
   //axios call
   const postData = {
     name,
     email,
     password,
     repeat_password,
+    referralCode,
     // returnSecureToken: true,
   };
   const reqUrl = process.env.REACT_APP_MYARBIT_HostUrl + "user";
@@ -65,11 +66,15 @@ export function runLogoutTimer(dispatch, timer, navigate) {
   }, timer);
 }
 
-export function checkAutoLogin(dispatch, navigate) {
+export function checkAutoLogin(dispatch, navigate, referralCode) {
   const tokenDetailsString = localStorage.getItem("jwt");
   const user = JSON.parse(localStorage.getItem("userDetails"));
   let tokenDetails = "";
   if (!tokenDetailsString) {
+    if (referralCode) {
+      navigate(`/referral?ref=${referralCode}`);
+      return;
+    }
     dispatch(Logout(navigate));
     return;
   }
