@@ -44,8 +44,7 @@ const Transactions = (props) => {
             </div>
             <div className="card-body">
               <div className="input-group mb-3">
-                <input type="text" className="form-control" defaultValue={process.env.REACT_APP_MYARBIT_HostUrl + "referral?ref=abc"} disabled ref={inputRef} />
-
+                <input type="text" className="form-control" defaultValue={process.env.REACT_APP_MYARBIT_DashboardUrl + "referral?ref=abc"} disabled ref={inputRef} />
                 <button className="btn btn-primary" type="button" onClick={handleCopyClick}>
                   {copyButtonText}
                 </button>
