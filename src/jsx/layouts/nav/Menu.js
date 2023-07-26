@@ -6,7 +6,7 @@ export const MenuList = [
     to: "pools",
   },
   {
-    title: " Profile",
+    title: "Profile",
     //classsChange: 'mm-collapse',
 
     iconStyle: <i class="bi bi-person-vcard-fill"></i>, //<i class="bi bi-person-vcard-fill"></i>,//<i className="bi bi-clock-history"></i>,
@@ -31,9 +31,21 @@ export const MenuList = [
     to: "stake-history",
   },
   {
-    title: " Transactions",
+    title: "Transactions",
     //classsChange: 'mm-collapse',
     iconStyle: <i className="bi bi-bank"></i>,
+    to: "transactions",
+  },
+  {
+    title: "Rewards",
+    //classsChange: 'mm-collapse',
+    iconStyle: <i class="bi bi-cash-coin"></i>,
+    to: "transactions",
+  },
+  {
+    title: "Tiers",
+    //classsChange: 'mm-collapse',
+    iconStyle: <i class="bi bi-ladder"></i>,
     to: "transactions",
   },
 
