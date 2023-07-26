@@ -56,7 +56,6 @@ import Theme8 from "./components/Dashboard/Demo/Theme8";
 
 /// App
 import AppProfile from "./components/AppsMenu/AppProfile/AppProfile";
-import EditProfile from "./pages/EditProfile";
 import Compose from "./components/AppsMenu/Email/Compose/Compose";
 import Inbox from "./components/AppsMenu/Email/Inbox/Inbox";
 import Read from "./components/AppsMenu/Email/Read/Read";
@@ -111,10 +110,13 @@ import Lightgallery from "./components/PluginsMenu/Lightgallery/Lightgallery";
 // Widget
 import Widget from "./pages/Widget";
 import Pools from "./pages/Pools";
+import EditProfile from "./pages/EditProfile";
 import ManageStaking from "./pages/ManageStakings";
+import Calculator from "./pages/Calculator";
 import StakeHistory from "./pages/StakeHistory";
 import Transactions from "./pages/Transactions";
-import Calculator from "./pages/Calculator";
+import Rewards from "./pages/Rewards";
+import Tiers from "./pages/Tiers";
 
 /// Table
 import SortingTable from "./components/table/SortingTable/SortingTable";
@@ -248,6 +250,8 @@ const Markup = () => {
     { url: "calculator", component: <Calculator /> },
     { url: "stake-history", component: <StakeHistory /> },
     { url: "transactions", component: <Transactions /> },
+    { url: "rewards", component: <Rewards /> },
+    { url: "tiers", component: <Tiers /> },
 
     ///// Form
     { url: "form-element", component: <Element /> },

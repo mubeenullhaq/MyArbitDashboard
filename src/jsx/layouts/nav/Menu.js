@@ -40,13 +40,13 @@ export const MenuList = [
     title: "Rewards",
     //classsChange: 'mm-collapse',
     iconStyle: <i class="bi bi-cash-coin"></i>,
-    to: "transactions",
+    to: "rewards",
   },
   {
     title: "Tiers",
     //classsChange: 'mm-collapse',
     iconStyle: <i class="bi bi-ladder"></i>,
-    to: "transactions",
+    to: "tiers",
   },
 
   // //Dashboard
