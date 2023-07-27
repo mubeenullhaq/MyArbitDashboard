@@ -1,9 +1,6 @@
 import React, { useState, useEffect, Fragment, Suspense } from "react";
 import { connect, useDispatch } from "react-redux";
-import {
-  getStakingsHistoryAction,
-  loadingToggleAction,
-} from "../../store/actions/ManageStakingsAction";
+import { getStakingsHistoryAction, loadingToggleAction } from "../../store/actions/ManageStakingsAction";
 
 const StakeHistory = (props) => {
   const dispatch = useDispatch();
@@ -38,7 +35,7 @@ const StakeHistory = (props) => {
                       <th scope="col">Duration(days)</th>
                       <th scope="col">Profit</th>
                       <th scope="col">Amount Staked</th>
-                      <th scope="col">Action</th>
+                      <th scope="col">Status</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -47,16 +44,9 @@ const StakeHistory = (props) => {
                         <tr key={staking.id}>
                           <td>{staking.pool_info.name}</td>
                           <td>{staking.pool_info.duration}</td>
-                          <td>{staking.pool_info.profit+ "%"}</td>
-                          <td>{staking.amount}</td>
-                          <td>
-                            <a
-                              class="btn btn-primary btn-xxs shadow"
-                              href="/react/demo/widget-basic"
-                            >
-                              Stake
-                            </a>
-                          </td>
+                          <td>{staking.pool_info.profit + "%"}</td>
+                          <td>{staking.amount_staked}</td>
+                          <td>{staking.status}</td>
                         </tr>
                       ))}
                   </tbody>
