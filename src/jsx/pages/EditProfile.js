@@ -59,7 +59,9 @@ const EditProfile = (props) => {
     dispatch(getLoggedInPartnerAction());
     setPartner(props.partners.partners);
     setPartnerProfileName(props.partners.partners.name);
-    setIsLoaded(true);
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 200);
   }, [isLoaded]);
 
   const handleSelectGender = (selectedOption) => {
@@ -123,7 +125,7 @@ const EditProfile = (props) => {
                   <ul>
                     <li>
                       <Link to={"/app-profile"}>Tier</Link>
-                      <span>3</span>
+                      <span>{partner.tier}</span>
                     </li>
                   </ul>
                 </div>
