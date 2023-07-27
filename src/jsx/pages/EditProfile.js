@@ -130,16 +130,6 @@ const EditProfile = (props) => {
                   </ul>
                 </div>
               </div>
-              <div className="card-footer">
-                <div className="input-group mb-3">
-                  <div className="form-control rounded text-center bg-white">Portfolio</div>
-                </div>
-                <div className="input-group">
-                  <a href="https://www.dexignzone.com/" target="blank" className="form-control text-primary rounded text-start bg-white">
-                    https://www.dexignzone.com/
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
