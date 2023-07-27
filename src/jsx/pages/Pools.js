@@ -15,7 +15,7 @@ function isNumber(str) {
 
 const Pools = (props) => {
   const reduxDispatch = useDispatch();
-  const [autoStakIsChecked, setAutoStakIsChecked] = useState(false);
+  const [autoStakIsChecked, setAutoStakIsChecked] = useState(true);
   const [modalVisibility, setModalVisibility] = useState([]);
 
   const toggleSwitch = () => {
