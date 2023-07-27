@@ -1,43 +1,82 @@
-import React, {
-  useState,
-  useReducer,
-  useEffect,
-  Fragment,
-  Suspense,
-} from "react";
+import React, { useState, useReducer, useEffect, Fragment, Suspense } from "react";
 import { connect, useDispatch } from "react-redux";
-import {
-  getStakingsAction,
-  loadingToggleAction,
-} from "../../store/actions/ManageStakingsAction";
+import { getStakingsAction, unStakeAction, loadingToggleAction } from "../../store/actions/ManageStakingsAction";
 import { Dropdown, Button, Modal } from "react-bootstrap";
-
-const initialState = false;
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "createStaking":
-      return { ...state, createStaking: true };
-    case "createStakingClose":
-      return { ...state, createStaking: false };
-
-    default:
-      return state;
-  }
-};
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const ManageStakings = (props) => {
-  const reduxDispatch = useDispatch();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [unstakeModal, setUnstakeModal] = useState(false);
+  const [unStakeDoc, setUnStakeDoc] = useState({});
+
   useEffect(() => {
-    reduxDispatch(loadingToggleAction(true));
-    reduxDispatch(getStakingsAction());
+    dispatch(loadingToggleAction(true));
+    dispatch(getStakingsAction());
   }, []);
-  function handleCreateStaking(e) {
+
+  const openUnstakeModal = (staking) => {
+    //console.log(staking);
+    setUnStakeDoc(staking);
+    setUnstakeModal(true);
+  };
+  const closeUnstakeModal = () => {
+    setUnstakeModal(false);
+  };
+
+  const handleUnstake = (e) => {
     e.preventDefault();
-    dispatch({ type: "createStakingClose" });
-  }
+    dispatch(unStakeAction(unStakeDoc, navigate));
+    setUnstakeModal(false);
+  };
   return (
     <Fragment>
+      {/******************************* Modal to update Partner Data *****************************************/}
+      <Modal className="modal fade" show={unstakeModal} onHide={() => closeUnstakeModal()}>
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Unstake</h5>
+            <Button variant="" type="button" className="close" x data-dismiss="modal" onClick={() => closeUnstakeModal()}>
+              <span>×</span>
+            </Button>
+          </div>
+          <div className="modal-body">
+            {/* Form for Pool Creation */}
+            <form className="comment-form" onSubmit={handleUnstake}>
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="form-group mb-3">
+                    <label htmlFor="author" className="text-black font-w600">
+                      {" "}
+                      Are you sure you want to Unstake? In case you unstake you will be charged 10% of the amount staked.<span className="required">*</span>
+                      {""}
+                    </label>
+                    {/* <input type="text" value={"partner.name"} className="form-control" onChange={(e) => console.log("e.target.value")} name="partnerName" placeholder="Enter Pool Name" /> */}
+                    <input type="text" value={"pool._id"} style={{ visibility: "hidden" }} name="poolId" placeholder="POOL_ID" />
+
+                    {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
+                  </div>
+                </div>
+
+                <div className="col-lg-12 text-center">
+                  <div class="row justify-content-center">
+                    <div class="col">
+                      <div className="form-group mb-3">
+                        <input type="submit" value="Yes" className="submit btn btn-success" name="submit" />
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="form-group mb-3">
+                        <input type="button" value="No" className="submit btn btn-danger" onClick={() => closeUnstakeModal()} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Modal>
       <Suspense
         fallback={
           <div id="preloader">
@@ -75,90 +114,13 @@ const ManageStakings = (props) => {
                           <td>{staking.pool_info.duration}</td>
                           <td>{staking.pool_info.profit + "%"}</td>
                           <td>{staking.amount_staked}</td>
-                          <td
-                            class={
-                              staking.auto_stake === true
-                                ? "text-success"
-                                : "text-danger"
-                            }
-                          >
-                            {staking.auto_stake == true ? "ON" : "OFF"}
-                          </td>
+                          <td class={staking.auto_stake === true ? "text-success" : "text-danger"}>{staking.auto_stake == true ? "ON" : "OFF"}</td>
                           <td>
                             {" "}
-                            <Button
-                              as="a"
-                              href="#"
-                              className="btn btn-primary mb-1 ms-1"
-                              onClick={() => {
-                                console.log("aaaaa");
-                                dispatch({ type: "createStaking" });
-                              }}
-                            >
-                              Stake
+                            <Button as="a" href="#" className="btn btn-primary mb-1 ms-1" onClick={() => openUnstakeModal(staking)}>
+                              Un-Stake
                             </Button>
                           </td>
-
-                          <Modal
-                            className="modal fade"
-                            show={state.createStaking}
-                          >
-                            <div className="modal-content">
-                              <div className="modal-header">
-                                <h5 className="modal-title">Send Message</h5>
-                                <Button
-                                  variant=""
-                                  type="button"
-                                  className="close"
-                                  data-dismiss="modal"
-                                  onClick={() =>
-                                    dispatch({ type: "createStakingClose" })
-                                  }
-                                >
-                                  <span>×</span>
-                                </Button>
-                              </div>
-                              <div className="modal-body">
-                                <form
-                                  className="comment-form"
-                                  onSubmit={handleCreateStaking}
-                                >
-                                  <div className="row">
-                                    <div className="col-lg-6">
-                                      <div className="form-group mb-3">
-                                        <label
-                                          htmlFor="author"
-                                          className="text-black font-w600"
-                                        >
-                                          {" "}
-                                          Amount{" "}
-                                          <span className="required">*</span>
-                                          {" dd"}
-                                        </label>
-                                        <input
-                                          type="text"
-                                          className="form-control"
-                                          defaultValue="Author"
-                                          name="Author"
-                                          placeholder="Author"
-                                        />
-                                      </div>
-                                    </div>
-                                    <div className="col-lg-12">
-                                      <div className="form-group mb-3">
-                                        <input
-                                          type="submit"
-                                          value="Confirm Staking"
-                                          className="submit btn btn-primary"
-                                          name="submit"
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </Modal>
                         </tr>
                       ))}
                   </tbody>
