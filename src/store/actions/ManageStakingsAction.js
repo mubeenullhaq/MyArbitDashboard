@@ -1,6 +1,10 @@
 import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
-import { createPool, formatStakings, formatError, getStakings, getStakingsHistory, createStaking, updatePool } from "../../services/ManageStakingsService";
+import { createPool, formatStakings, formatError, getStakings, getStakingsHistory, createStaking, unStake } from "../../services/ManageStakingsService";
 import { CONFIRMED_CREATE_STAKINGS_ACTION, CONFIRMED_GET_STAKINGS_ACTION, GET_STAKINGS_FAILED_ACTION, LOADING_TOGGLE_ACTION } from "./ManageStakingTypes";
+import { CONFIRMED_GET_PARTNERS_ACTION } from "./PartnersTypes";
+
+import { confirmedTopUpPartnerAction } from "./PartnersActions";
+import swal from "sweetalert";
 
 //Action to create a staking of a Logged-In User
 export function createStakingsAction(_amount, _poolId, _autoStake, navigate) {
@@ -20,6 +24,33 @@ export function createStakingsAction(_amount, _poolId, _autoStake, navigate) {
         const errorMessage = formatError(error.response.data);
         dispatch(getStakingsFailedAction(errorMessage));
       });
+  };
+}
+
+//Action to create a staking of a Logged-In User
+export function unStakeAction(_unstakeDoc, navigate) {
+  return (dispatch, getState) => {
+    unStake(_unstakeDoc)
+      .then((response) => {
+        localStorage.setItem("userDetails", JSON.stringify(response.data));
+        dispatch(confirmedUnstakeAction(response.data));
+        swal("Success!", "You have successfully unstaked!", "success");
+        navigate("/stake-history");
+      })
+      .catch((error) => {
+        //console.log('error');
+        //console.log(error);
+        console.log(error);
+        const errorMessage = formatError(error.response.data);
+        dispatch(getStakingsFailedAction(errorMessage));
+      });
+  };
+}
+
+export function confirmedUnstakeAction(_partner) {
+  return {
+    type: CONFIRMED_GET_PARTNERS_ACTION,
+    payload: _partner,
   };
 }
 
