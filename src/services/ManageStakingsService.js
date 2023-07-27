@@ -19,6 +19,19 @@ export function createStaking(_amount, _poolId, _autoStake) {
 }
 
 //Read All in_process stakings of a logged in User
+export function unStake(_unStakeDoc) {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "stakings/unstake";
+  //console.log(localStorage.jwt);
+  let token = JSON.parse(localStorage.jwt);
+  // const data = {};
+  const headers = {
+    "Content-Type": "application/json",
+    "x-auth-token": token,
+  };
+  return axiosInstance.put(url, _unStakeDoc, { headers });
+}
+
+//Read All in_process stakings of a logged in User
 export function getStakings() {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "stakings";
   //console.log(localStorage.jwt);
