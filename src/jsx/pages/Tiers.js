@@ -37,38 +37,342 @@ const Transactions = (props) => {
           </div>
         }
       >
+        {/************************************Tier 1***********************************/}
         <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Tiers</h4>
+              <h4 className="card-title">Tier 1</h4>
             </div>
             <div className="card-body">
               <div className="table-responsive recentOrderTable">
-                {/* <table className="table verticle-middle table-responsive-md">
+                <table className="table verticle-middle table-responsive-md">
                   <thead>
                     <tr>
-                      <th scope="col">Transaction Type</th>
-                      <th scope="col">Transaction Amount</th>
-                      <th scope="col">Created At</th>
+                      <th scope="col">Pool</th>
+                      <th scope="col">Investment Period</th>
+                      <th scope="col">Return On Investment</th>
                       <th scope="col">Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {props.transactions.transactions &&
-                      props.transactions.transactions.map((transaction) => (
-                        <tr key={transaction.id}>
-                          <td>
-                            <span class={transaction.type === "deposit" ? "badge bg-success badge-lg" : "badge-danger badge badge-lg"}>{transaction.type}</span>
-                          </td>
-                          <td>{transaction.amount}</td>
-                          <td>{transaction.created_at}</td>
-                          <td>
-                            <span class={transaction.status === "Served" ? "text-success" : "text-danger"}>{transaction.status}</span>
-                          </td>
-                        </tr>
-                      ))}
+                    <tr>
+                      <td>Silver Elite</td>
+                      <td>10</td>
+                      <td>2.5%</td>
+                    </tr>
+                    <tr>
+                      <td>Gold Elite </td>
+                      <td>30</td>
+                      <td>9%</td>
+                    </tr>
+                    <tr>
+                      <td>Platinum Elite </td>
+                      <td>60</td>
+                      <td>20%</td>
+                    </tr>
+                    <tr>
+                      <td>Titanium Elite </td>
+                      <td>90</td>
+                      <td>33%</td>
+                    </tr>
+                    <tr>
+                      <td>Daimond Elite </td>
+                      <td>180</td>
+                      <td>70%</td>
+                    </tr>
                   </tbody>
-                </table> */}
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/************************************Tier 2***********************************/}
+        <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
+          <div className="card">
+            <div className="card-header">
+              <h4 className="card-title">Tier 2</h4>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive recentOrderTable">
+                <table className="table verticle-middle table-responsive-md">
+                  <thead>
+                    <tr>
+                      <th scope="col">Pool</th>
+                      <th scope="col">Investment Period</th>
+                      <th scope="col">Return On Investment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Silver Elite</td>
+                      <td>10</td>
+                      <td>2.75%</td>
+                    </tr>
+                    <tr>
+                      <td>Gold Elite</td>
+                      <td>30</td>
+                      <td>9.9%</td>
+                    </tr>
+                    <tr>
+                      <td>Platinum Elite</td>
+                      <td>60</td>
+                      <td>22%</td>
+                    </tr>
+                    <tr>
+                      <td>Titanium Elite</td>
+                      <td>90</td>
+                      <td>36.3%</td>
+                    </tr>
+                    <tr>
+                      <td>Diamond Elite</td>
+                      <td>180</td>
+                      <td>77%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/************************************Tier 3***********************************/}
+        <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
+          <div className="card">
+            <div className="card-header">
+              <h4 className="card-title">Tier 3</h4>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive recentOrderTable">
+                <table className="table verticle-middle table-responsive-md">
+                  <thead>
+                    <tr>
+                      <th scope="col">Pool</th>
+                      <th scope="col">Investment Period</th>
+                      <th scope="col">Return On Investment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Silver Elite</td>
+                      <td>10</td>
+                      <td>3%</td>
+                    </tr>
+                    <tr>
+                      <td>Gold Elite</td>
+                      <td>30</td>
+                      <td>10.8%</td>
+                    </tr>
+                    <tr>
+                      <td>Platinum Elite</td>
+                      <td>60</td>
+                      <td>24%</td>
+                    </tr>
+                    <tr>
+                      <td>Titanium Elite</td>
+                      <td>90</td>
+                      <td>39.6%</td>
+                    </tr>
+                    <tr>
+                      <td>Diamond Elite</td>
+                      <td>180</td>
+                      <td>84%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/************************************Tier 4***********************************/}
+        <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
+          <div className="card">
+            <div className="card-header">
+              <h4 className="card-title">Tier 4</h4>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive recentOrderTable">
+                <table className="table verticle-middle table-responsive-md">
+                  <thead>
+                    <tr>
+                      <th scope="col">Pool</th>
+                      <th scope="col">Investment Period</th>
+                      <th scope="col">Return On Investment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Silver Elite</td>
+                      <td>10</td>
+                      <td>3.25%</td>
+                    </tr>
+                    <tr>
+                      <td>Gold Elite</td>
+                      <td>30</td>
+                      <td>11.7%</td>
+                    </tr>
+                    <tr>
+                      <td>Platinum Elite</td>
+                      <td>60</td>
+                      <td>26%</td>
+                    </tr>
+                    <tr>
+                      <td>Titanium Elite</td>
+                      <td>90</td>
+                      <td>42.9%</td>
+                    </tr>
+                    <tr>
+                      <td>Diamond Elite</td>
+                      <td>180</td>
+                      <td>91%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/************************************Tier 5***********************************/}
+        <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
+          <div className="card">
+            <div className="card-header">
+              <h4 className="card-title">Tier 5</h4>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive recentOrderTable">
+                <table className="table verticle-middle table-responsive-md">
+                  <thead>
+                    <tr>
+                      <th scope="col">Pool</th>
+                      <th scope="col">Investment Period</th>
+                      <th scope="col">Return On Investment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Silver Elite</td>
+                      <td>10</td>
+                      <td>3.5%</td>
+                    </tr>
+                    <tr>
+                      <td>Gold Elite</td>
+                      <td>30</td>
+                      <td>12.6%</td>
+                    </tr>
+                    <tr>
+                      <td>Platinum Elite</td>
+                      <td>60</td>
+                      <td>28%</td>
+                    </tr>
+                    <tr>
+                      <td>Titanium Elite</td>
+                      <td>90</td>
+                      <td>46.2%</td>
+                    </tr>
+                    <tr>
+                      <td>Diamond Elite</td>
+                      <td>180</td>
+                      <td>98%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/************************************Tier 6***********************************/}
+        <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
+          <div className="card">
+            <div className="card-header">
+              <h4 className="card-title">Tier 6</h4>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive recentOrderTable">
+                <table className="table verticle-middle table-responsive-md">
+                  <thead>
+                    <tr>
+                      <th scope="col">Pool</th>
+                      <th scope="col">Investment Period</th>
+                      <th scope="col">Return On Investment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Silver Elite</td>
+                      <td>10</td>
+                      <td>3.75%</td>
+                    </tr>
+                    <tr>
+                      <td>Gold Elite</td>
+                      <td>30</td>
+                      <td>13.5%</td>
+                    </tr>
+                    <tr>
+                      <td>Platinum Elite</td>
+                      <td>60</td>
+                      <td>30%</td>
+                    </tr>
+                    <tr>
+                      <td>Titanium Elite</td>
+                      <td>90</td>
+                      <td>49.5%</td>
+                    </tr>
+                    <tr>
+                      <td>Diamond Elite</td>
+                      <td>180</td>
+                      <td>105%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/************************************Tier 7***********************************/}
+        <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
+          <div className="card">
+            <div className="card-header">
+              <h4 className="card-title">Tier 7</h4>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive recentOrderTable">
+                <table className="table verticle-middle table-responsive-md">
+                  <thead>
+                    <tr>
+                      <th scope="col">Pool</th>
+                      <th scope="col">Investment Period</th>
+                      <th scope="col">Return On Investment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Silver Elite</td>
+                      <td>10</td>
+                      <td>4%</td>
+                    </tr>
+                    <tr>
+                      <td>Gold Elite</td>
+                      <td>30</td>
+                      <td>14.4%</td>
+                    </tr>
+                    <tr>
+                      <td>Platinum Elite</td>
+                      <td>60</td>
+                      <td>32%</td>
+                    </tr>
+                    <tr>
+                      <td>Titanium Elite</td>
+                      <td>90</td>
+                      <td>52.8%</td>
+                    </tr>
+                    <tr>
+                      <td>Diamond Elite</td>
+                      <td>180</td>
+                      <td>112%</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
