@@ -93,6 +93,16 @@ export function TopUpLoggedInPartner(_topUpAmount) {
   return axiosInstance.put(url, { topUp_amount: _topUpAmount }, { headers });
 }
 
+//Widthdraw for Logged In partner
+export function withdrawLoggedInPartner(_withdrawAmount, _walletAddress) {
+  const url = process.env.REACT_APP_MYARBIT_HostUrl + "user/withdraw";
+  let token = JSON.parse(localStorage.jwt);
+  const headers = {
+    "Content-Type": "application/json",
+    "x-auth-token": token,
+  };
+  return axiosInstance.put(url, { withdraw_amount: _withdrawAmount, wallet_address: _walletAddress }, { headers });
+}
 //Block partner admin Only
 export function blockPartner(_partnerId, _status) {
   const url = process.env.REACT_APP_MYARBIT_HostUrl + "user/block";
