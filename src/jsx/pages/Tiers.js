@@ -51,7 +51,6 @@ const Transactions = (props) => {
                       <th scope="col">Pool</th>
                       <th scope="col">Investment Period</th>
                       <th scope="col">Return On Investment</th>
-                      <th scope="col">Status</th>
                     </tr>
                   </thead>
                   <tbody>
