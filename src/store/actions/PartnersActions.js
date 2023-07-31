@@ -8,6 +8,7 @@ import {
   formatError,
   TopUpLoggedInPartner,
   getReferredPartners,
+  withdrawLoggedInPartner,
 } from "../../services/PartnersService";
 import { CONFIRMED_GET_PARTNERS_ACTION, FAILED_GET_PARTNERS_ACTION, CONFIRMED_UPDATE_PARTNER_ACTION, PARTNERS_NOT_FOUND_ACTION } from "./PartnersTypes";
 import swal from "sweetalert";
@@ -130,6 +131,29 @@ export function topUpPartnerAction(_topUpAmount) {
 
 export function confirmedTopUpPartnerAction(_partner, _topUpAmount) {
   swal("Great!", `You have successfull topped Up ${_topUpAmount}!`, "success");
+  return {
+    type: CONFIRMED_GET_PARTNERS_ACTION,
+    payload: _partner,
+  };
+}
+
+//Action for hadling withdraws Logged In partner
+export function withdrawPartnerAction(_withdrawAmount, _walletAddress) {
+  return (dispatch, getState) => {
+    withdrawLoggedInPartner(_withdrawAmount, _walletAddress)
+      .then((response) => {
+        localStorage.setItem("userDetails", JSON.stringify(response.data));
+        dispatch(confirmedWithdrawPartnerAction(response.data, _withdrawAmount, _walletAddress));
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(updatePartnerFailedAction(error.response.data));
+      });
+  };
+}
+
+export function confirmedWithdrawPartnerAction(_partner, _withdrawAmount, _walletAddress) {
+  swal("Great!", `Your request for withdrwal of amount ${_withdrawAmount} is generated! Normally it takes around 24 hours to prcess all withdrawl requests`, "success");
   return {
     type: CONFIRMED_GET_PARTNERS_ACTION,
     payload: _partner,
