@@ -6,11 +6,14 @@ import { Link } from "react-router-dom";
 import LogoutPage from "./Logout";
 
 import profile from "../../../images//United.png";
-import { topUpPartnerAction } from "../../../store/actions/PartnersActions";
+import { topUpPartnerAction, withdrawPartnerAction } from "../../../store/actions/PartnersActions";
 
 const Header = ({ onNote }) => {
   const [topUpModal, setTopUpModal] = useState(false);
+  const [withDrawModal, setWithDrawModal] = useState(false);
   const [topUpAmount, setTopUpAmount] = useState(0);
+  const [withdrawAmount, setWithdrawAmount] = useState();
+  const [walletAddress, setWalletAddress] = useState();
   const [rightSelect, setRightSelect] = useState("Eng");
   const dispatch = useDispatch();
   const partner = JSON.parse(localStorage.userDetails);
@@ -65,11 +68,23 @@ const Header = ({ onNote }) => {
     // }, 2000);
     closeTopUpModal();
   }
+
+  function handleWithdraw(e) {
+    e.preventDefault();
+    dispatch(withdrawPartnerAction(withdrawAmount, walletAddress));
+    closeWithDrawModal();
+  }
   const closeTopUpModal = () => {
     setTopUpModal(false);
   };
   const openTopUpModal = (partner) => {
     setTopUpModal(true);
+  };
+  const openWithdrawModal = (partner) => {
+    setWithDrawModal(true);
+  };
+  const closeWithDrawModal = () => {
+    setWithDrawModal(false);
   };
   return (
     <>
@@ -118,6 +133,66 @@ const Header = ({ onNote }) => {
           </div>
         </div>
       </Modal>
+
+      {/******************************* Withdraw Modal *****************************************/}
+      <Modal className="modal fade" show={withDrawModal} onHide={() => closeWithDrawModal()}>
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Withdraw</h5>
+            <Button variant="" type="button" className="close" x data-dismiss="modal" onClick={() => closeWithDrawModal()}>
+              <span>×</span>
+            </Button>
+          </div>
+          <div className="modal-body">
+            {/* Form for Pool Creation */}
+            <form className="comment-form" onSubmit={(e) => handleWithdraw(e)}>
+              <div className="row">
+                <div className="col-lg-8">
+                  <div className="form-group mb-3">
+                    <label htmlFor="author" className="text-black font-w600">
+                      {" "}
+                      Withdraw Amount <span className="required">*</span>
+                      {""}
+                    </label>
+                    <input type="Number" value={withdrawAmount} className="form-control" onChange={(e) => setWithdrawAmount(e.target.value)} name="partnerName" placeholder="Enter Amount" />
+                    {/* <input type="text" value={pool._id} style={{ visibility: "hidden" }} name="poolId" placeholder="POOL_ID" /> */}
+
+                    {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
+                  </div>
+                </div>
+                <div className="col-lg-8">
+                  <div className="form-group mb-3">
+                    <label htmlFor="author" className="text-black font-w600">
+                      {" "}
+                      Reciever Address <span className="required">*</span>
+                      {""}
+                    </label>
+                    <input type="Text" value={walletAddress} className="form-control" onChange={(e) => setWalletAddress(e.target.value)} name="partnerName" placeholder="Your Wallet Address" />
+                    {/* <input type="text" value={pool._id} style={{ visibility: "hidden" }} name="poolId" placeholder="POOL_ID" /> */}
+
+                    {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  value={"aad"}
+                  style={{ visibility: "hidden" }}
+                  className="form-control"
+                  onChange={(e) => handleInputChange("role", e.target.value)}
+                  name="poolName"
+                  placeholder="Enter Pool Name"
+                />
+                <div className="col-lg-12">
+                  <div className="form-group mb-3">
+                    <input type="submit" value="Confirm" className="submit btn btn-primary" name="submit" />
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </Modal>
+
       <div className={`header ${headerFix ? "is-fixed" : ""}`}>
         <div className="header-content">
           <nav className="navbar navbar-expand">
@@ -141,6 +216,13 @@ const Header = ({ onNote }) => {
                         <Button as="a" href="#" className="btn btn-primary mb-1 ms-1" onClick={() => openTopUpModal()}>
                           {" "}
                           Top&nbsp;Up
+                        </Button>
+                      </div>
+                      <div className="col">
+                        {" "}
+                        <Button as="a" href="#" className="btn btn-primary mb-1 ms-1" onClick={() => openWithdrawModal()}>
+                          {" "}
+                          Withdraw
                         </Button>
                       </div>
                       <div className="col">
