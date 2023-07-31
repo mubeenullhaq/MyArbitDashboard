@@ -41,7 +41,7 @@ const Transactions = (props) => {
         <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Tier 1</h4>
+              <h4 className="card-title">Tier 1 (balance: 0 - 500 )</h4>
             </div>
             <div className="card-body">
               <div className="table-responsive recentOrderTable">
@@ -76,7 +76,7 @@ const Transactions = (props) => {
                       <td>33%</td>
                     </tr>
                     <tr>
-                      <td>Daimond Elite </td>
+                      <td>Diamond Elite </td>
                       <td>180</td>
                       <td>70%</td>
                     </tr>
@@ -90,7 +90,7 @@ const Transactions = (props) => {
         <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Tier 2</h4>
+              <h4 className="card-title">Tier 2 (balance: 501 - 2,000 )</h4>
             </div>
             <div className="card-body">
               <div className="table-responsive recentOrderTable">
@@ -138,7 +138,7 @@ const Transactions = (props) => {
         <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Tier 3</h4>
+              <h4 className="card-title">Tier 3 (balance: 2,001 - 5,000 )</h4>
             </div>
             <div className="card-body">
               <div className="table-responsive recentOrderTable">
@@ -186,7 +186,7 @@ const Transactions = (props) => {
         <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Tier 4</h4>
+              <h4 className="card-title">Tier 4 (balance: 5,001 - 10,000)</h4>
             </div>
             <div className="card-body">
               <div className="table-responsive recentOrderTable">
@@ -235,7 +235,7 @@ const Transactions = (props) => {
         <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Tier 5</h4>
+              <h4 className="card-title">Tier 5 (balance: 10,001 - 25,000 )</h4>
             </div>
             <div className="card-body">
               <div className="table-responsive recentOrderTable">
@@ -284,7 +284,7 @@ const Transactions = (props) => {
         <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Tier 6</h4>
+              <h4 className="card-title">Tier 6 (balance: 25,001 - 50,000 )</h4>
             </div>
             <div className="card-body">
               <div className="table-responsive recentOrderTable">
@@ -333,7 +333,7 @@ const Transactions = (props) => {
         <div className="col-xl-12 col-lg-12 col-xxl-12 col-sm-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Tier 7</h4>
+              <h4 className="card-title">Tier 7 (balance: 50,000plus)</h4>
             </div>
             <div className="card-body">
               <div className="table-responsive recentOrderTable">
