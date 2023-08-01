@@ -164,6 +164,19 @@ const Header = ({ onNote }) => {
                   <div className="form-group mb-3">
                     <label htmlFor="author" className="text-black font-w600">
                       {" "}
+                      Network <span className="required">*</span>
+                      {""}
+                    </label>
+                    <input type="Text" value={"TRON TRC20"} className="form-control" name="partnerName" placeholder="" disabled />
+                    {/* <input type="text" value={pool._id} style={{ visibility: "hidden" }} name="poolId" placeholder="POOL_ID" /> */}
+
+                    {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
+                  </div>
+                </div>
+                <div className="col-lg-8">
+                  <div className="form-group mb-3">
+                    <label htmlFor="author" className="text-black font-w600">
+                      {" "}
                       Reciever Address <span className="required">*</span>
                       {""}
                     </label>
@@ -173,15 +186,6 @@ const Header = ({ onNote }) => {
                     {/* {errors.poolName && <div className="text-danger fs-12">{errors.poolName}</div>} */}
                   </div>
                 </div>
-                <input
-                  type="text"
-                  value={"aad"}
-                  style={{ visibility: "hidden" }}
-                  className="form-control"
-                  onChange={(e) => handleInputChange("role", e.target.value)}
-                  name="poolName"
-                  placeholder="Enter Pool Name"
-                />
                 <div className="col-lg-12">
                   <div className="form-group mb-3">
                     <input type="submit" value="Confirm" className="submit btn btn-primary" name="submit" />
