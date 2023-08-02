@@ -2900,14 +2900,15 @@ textarea.form-control-lg {
 .input-group-tier-text {
   display: flex;
   align-items: center;
-  padding: 0.6rem 0.4rem;
+  padding: 0.3rem 0.4rem;
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.5;
-  color: #362465;
+  color: #ffffff;
   text-align: center;
   white-space: nowrap;
-  background-color: #e9ecef;
+  background: linear-gradient(to right, #00249c, #ff0094  );
+  /* background-color: #00249c; */
   border: 1px solid #eeee;
   border-radius: 0.75rem;
 }
