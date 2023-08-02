@@ -207,7 +207,7 @@ const Header = ({ onNote }) => {
                 </div>
                 <div className="sell-blance">
                   <div className="input-tier-group">
-                    <span className="input-group-tier-text">Tier &nbsp; &nbsp;{partner.tier}</span>
+                    <span className="input-group-tier-text">Tier &nbsp;{partner.tier}</span>
                   </div>
                 </div>
               </div>
