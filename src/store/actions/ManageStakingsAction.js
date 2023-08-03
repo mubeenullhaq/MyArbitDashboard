@@ -15,6 +15,7 @@ export function createStakingsAction(_amount, _poolId, _autoStake, navigate) {
         let updated_user = response.data.updated_user;
         localStorage.setItem("userDetails", JSON.stringify(updated_user));
         dispatch(confirmedCreateStakingsAction(true));
+        dispatch(confirmedCreateStakingsPartnerAction(updated_user));
         navigate("/manage-stakings");
       })
       .catch((error) => {
@@ -27,6 +28,19 @@ export function createStakingsAction(_amount, _poolId, _autoStake, navigate) {
   };
 }
 
+export function confirmedCreateStakingsAction(staking) {
+  return {
+    type: CONFIRMED_CREATE_STAKINGS_ACTION,
+    payload: staking,
+  };
+}
+
+export function confirmedCreateStakingsPartnerAction(_partner) {
+  return {
+    type: CONFIRMED_GET_PARTNERS_ACTION,
+    payload: _partner,
+  };
+}
 //Action to create a staking of a Logged-In User
 export function unStakeAction(_unstakeDoc, navigate) {
   return (dispatch, getState) => {
@@ -94,13 +108,6 @@ export function confirmedGetStakingsAction(flag) {
   return {
     type: CONFIRMED_GET_STAKINGS_ACTION,
     payload: flag,
-  };
-}
-
-export function confirmedCreateStakingsAction(staking) {
-  return {
-    type: CONFIRMED_CREATE_STAKINGS_ACTION,
-    payload: staking,
   };
 }
 
