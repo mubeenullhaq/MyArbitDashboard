@@ -1,11 +1,5 @@
 /// Menu
-import React, {
-  Component,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import React, { Component, useContext, useEffect, useReducer, useState } from "react";
 //import Metismenu from "metismenujs";
 /// Scroll
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -50,8 +44,7 @@ const initialState = {
 };
 
 const SideBar = () => {
-  const { iconHover, sidebarposition, headerposition, sidebarLayout } =
-    useContext(ThemeContext);
+  const { iconHover, sidebarposition, headerposition, sidebarLayout } = useContext(ThemeContext);
 
   const [state, setState] = useReducer(reducer, initialState);
 
@@ -216,13 +209,7 @@ const SideBar = () => {
   return (
     <div
       className={`deznav  border-right ${iconHover} ${
-        sidebarposition.value === "fixed" &&
-        sidebarLayout.value === "horizontal" &&
-        headerposition.value === "static"
-          ? hideOnScroll > 120
-            ? "fixed"
-            : ""
-          : ""
+        sidebarposition.value === "fixed" && sidebarLayout.value === "horizontal" && headerposition.value === "static" ? (hideOnScroll > 120 ? "fixed" : "") : ""
       }`}
     >
       <PerfectScrollbar className="deznav-scroll">
@@ -237,12 +224,7 @@ const SideBar = () => {
               );
             } else {
               return (
-                <li
-                  className={` ${
-                    state.active === data.title ? "mm-active" : ""
-                  }`}
-                  key={index}
-                >
+                <li className={` ${state.active === data.title ? "mm-active" : ""}`} key={index}>
                   {data.content && data.content.length > 0 ? (
                     <Link
                       to={"#"}
@@ -262,22 +244,11 @@ const SideBar = () => {
                     </NavLink>
                   )}
                   <Collapse in={state.active === data.title ? true : false}>
-                    <ul
-                      className={`${
-                        menuClass === "mm-collapse" ? "mm-show" : ""
-                      }`}
-                    >
+                    <ul className={`${menuClass === "mm-collapse" ? "mm-show" : ""}`}>
                       {data.content &&
                         data.content.map((data, index) => {
                           return (
-                            <li
-                              key={index}
-                              className={`${
-                                state.activeSubmenu === data.title
-                                  ? "mm-active"
-                                  : ""
-                              }`}
-                            >
+                            <li key={index} className={`${state.activeSubmenu === data.title ? "mm-active" : ""}`}>
                               {data.content && data.content.length > 0 ? (
                                 <>
                                   <NavLink
@@ -289,33 +260,14 @@ const SideBar = () => {
                                   >
                                     {data.title}
                                   </NavLink>
-                                  <Collapse
-                                    in={
-                                      state.activeSubmenu === data.title
-                                        ? true
-                                        : false
-                                    }
-                                  >
-                                    <ul
-                                      className={`${
-                                        menuClass === "mm-collapse"
-                                          ? "mm-show"
-                                          : ""
-                                      }`}
-                                    >
+                                  <Collapse in={state.activeSubmenu === data.title ? true : false}>
+                                    <ul className={`${menuClass === "mm-collapse" ? "mm-show" : ""}`}>
                                       {data.content &&
                                         data.content.map((data, index) => {
                                           return (
                                             <>
                                               <li key={index}>
-                                                <Link
-                                                  className={`${
-                                                    path === data.to
-                                                      ? "mm-active"
-                                                      : ""
-                                                  }`}
-                                                  to={data.to}
-                                                >
+                                                <Link className={`${path === data.to ? "mm-active" : ""}`} to={data.to}>
                                                   {data.title}
                                                 </Link>
                                               </li>
